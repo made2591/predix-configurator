@@ -26,30 +26,32 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s8">
+            <div class="input-field col s9">
                 <p class="light" for="predixcloudidentity"><b>PROXY_HOST</b>: Default "com.ge.dspmicro.machineadapter.opcua-0"</p>
-                <input class="form-control input-md" #predixcloudidentity="ngModel" required id="predixcloudidentity" name="predixcloudidentity" type="text" placeholder="PROXY_HOST" [(ngModel)]="predixCloudConfig.PROXY_HOST">
+                <input class="form-control input-md" #predixcloudidentity="ngModel" required id="proxyhost" name="proxyhost" type="text" placeholder="PROXY_HOST" [(ngModel)]="predixCloudConfig.PROXY_HOST">
             </div>
-            <form [formGroup]="exceptionsForm" novalidate (ngSubmit)="save(exceptionsForm)">
-                <div class="input-field col s4">
-                    <p class="light">Add new proxy exception</p>
-                    <input #PROXY_EXCEPTION (keyup.enter)="addException(PROXY_EXCEPTION.value)" style="width:30%" id="PROXY_EXCEPTION" type="text" class="validate" value="">
-                    <a (click)="addGroup(PROXY_EXCEPTION.value)" style="cursor: default" class="btn-floating btn-large waves-effect waves-light red" id="addException"><i class="material-icons">add</i></a>
-                </div>
-                <div class="margin-20">
-                    <div>exceptionsForm details:-</div>
-                    <pre>form value: <br>{{exceptionsForm.value | json}}</pre>
-                </div>
-                <div class="input-field col s12">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Host exception</th>
-                        </tr>
-                        </thead>
-                        <tbody id="PROXY_EXCEPTIONS">
-                        </tbody>
-                    </table>
+            <div class="input-field col s3">
+                <a class="btn-floating btn-small waves-effect waves-light light-blue" id="addproxyexception" name="addproxyexception" (click)="addException();"><i class="material-icons">add</i></a>
+            </div>
+            <form [formGroup]="exceptionsForm">
+                <div formArrayName="exceptions">
+                    <div class="input-field col s12">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Host exceptions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="PROXY_EXCEPTIONS">
+                            <tr *ngFor="let prop of exceptionsForm.get('exceptions').controls; let i = index" >
+                                <td>
+                                    <input type="text" class="form-control" [formControlName]="i" style="width: 80%; margin-right: 10%;">
+                                    <a class="btn-floating btn-small waves-effect waves-light red" id="removeproxyexception" name="removeproxyexception" (click)='removeException("i");'><i class="material-icons">remove</i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </form>
             <div class="row">

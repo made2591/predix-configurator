@@ -1,5 +1,5 @@
 import { Component, OnInit }                                from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators }    from '@angular/forms';
+import {FormGroup, FormArray, FormBuilder, Validators, FormControl}    from '@angular/forms';
 
 import { PredixCloudConfig }                                from '../data/predixConfigurationData.model';
 import { PredixConfigurationDataService }                   from '../data/predixConfigurationData.service';
@@ -23,16 +23,17 @@ export class PredixCloudConfigComponent implements OnInit {
     ngOnInit() {
         this.predixCloudConfig = this.predixConfigurationDataService.getPredixCloudConfig();
         this.exceptionsForm = this.formBuilder.group({
+            exceptions: this.formBuilder.array([])
         });
         console.log('PredixCloudConfig feature loaded!');
     }
     
-    addGroup(newException: string) {
+    addException() {
+        (<FormArray>this.exceptionsForm.get('exceptions')).push(new FormControl());
+    }
     
-        let data = this.formBuilder.group([]);
-        this.exceptionsForm.addControl(newException, data);
-        document.getElementById('PROXY_EXCEPTION').value = '';
-        
+    removeException(i: number) {
+        (<FormArray>this.exceptionsForm.get('exceptions')).removeAt(i);
     }
     
     save(form: any) {

@@ -9,13 +9,23 @@ export class PredixConfigurationData {
     TAG_MAPPING_SCHEMA: TagMappingSchema        = new TagMappingSchema();
     
     setDefault() {
-        this.GLOBAL_CONFIG          = new GlobalConfig().setDefault();
-        this.IGS_CONFIG             = new IgsConfig().setDefault();
-        this.PREDIX_GLOBAL_CONFIG   = new PredixGlobalConfig().setDefault();
-        this.PREDIX_CLOUD_CONFIG    = new PredixCloudConfig().setDefault();
-        this.PREDIX_MACHINE_CONFIG  = new PredixMachineConfig().setDefault();
-        this.SITES                  = new Sites().setDefault();
-        this.TAG_MAPPING_SCHEMA     = new TagMappingSchema().setDefault();
+
+        this.GLOBAL_CONFIG          = new GlobalConfig();
+        this.IGS_CONFIG             = new IgsConfig();
+        this.PREDIX_GLOBAL_CONFIG   = new PredixGlobalConfig();
+        this.PREDIX_CLOUD_CONFIG    = new PredixCloudConfig();
+        this.PREDIX_MACHINE_CONFIG  = new PredixMachineConfig();
+        this.SITES                  = new Sites();
+        this.TAG_MAPPING_SCHEMA     = new TagMappingSchema();
+    
+        this.GLOBAL_CONFIG.setDefault();
+        this.IGS_CONFIG.setDefault();
+        this.PREDIX_GLOBAL_CONFIG.setDefault();
+        this.PREDIX_CLOUD_CONFIG.setDefault();
+        this.PREDIX_MACHINE_CONFIG.setDefault();
+        this.SITES.setDefault();
+        this.TAG_MAPPING_SCHEMA.setDefault();
+
     }
     
     clear() {
