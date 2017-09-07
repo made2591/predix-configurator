@@ -24,7 +24,7 @@ export class PredixCloudConfigComponent implements OnInit {
         this.predixCloudConfig = this.predixConfigurationDataService.getPredixCloudConfig();
         this.exceptionsForm = this.formBuilder.group({
             exceptionName: [''],
-            exceptionList: this.formBuilder.array([])
+            exceptionList: this.formBuilder.array(this.predixCloudConfig.PROXY_EXCEPTIONS)
         });
         console.log('PredixCloudConfig feature loaded!');
     }

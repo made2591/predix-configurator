@@ -1,0 +1,32 @@
+<form #tagMappingSchemaForm="ngForm" class="editForm" novalidate>
+    <div class="col s12 center">
+        <h5 class="center">{{title}}</h5>
+        <p class="light center">{{description}}</p>
+        <br>
+    </div>
+
+    <div class="tab-pane fade in active">
+        <div class="input-field col s6">
+            <p class="light" for="globalconfigsuffix"><b>TIMESERIES_ZONE_ID</b>: This is the ZONE ID (cf env main app name) needed to define timeseries.</p>
+            <input class="form-control input-md" #globalconfigsuffix="ngModel" required id="globalconfigsuffix" name="globalconfigsuffix" type="text" placeholder="TIMESERIES_ZONE_ID" [(ngModel)]="tagMappingSchema.TAG_MAPPING_SCHEMA">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12" style="text-align: center;">
+            <button uiSref="predixCloudConfig" class="btn btn-outline-rounded btn-default" (click)="save(tagMappingSchemaForm)">Previous Step
+                <i class="material-icons right">navigate_before</i>
+            </button>
+            <button class="btn waves-effect waves-light red" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
+                <i class="material-icons right">delete</i>
+            </button>
+            <button class="btn waves-effect waves-light green" style="margin: 5px auto;" name="load" id="load" (click)="tagMappingSchema.setDefault();">Load Conf
+                <i class="material-icons right">file_upload</i>
+            </button>
+            <button uiSref="result" class="btn btn-success btn-outline-rounded btn-info" [disabled]="!tagMappingSchemaForm.valid" (click)="save(tagMappingSchemaForm)">Next Step
+                <i class="material-icons right">navigate_next</i>
+            </button>
+        </div>
+    </div>
+
+</form>

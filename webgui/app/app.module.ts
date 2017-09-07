@@ -11,6 +11,7 @@ import { NavbarComponent }                          from './navbar/navbar.compon
 import { IgsConfigComponent }                       from './igsConfig/igsConfig.component';
 import { PredixGlobalConfigComponent }              from './predixGlobalConfig/predixGlobalConfig.component';
 import { PredixCloudConfigComponent }               from "./predixCloudConfig/predixCloudConfig.component";
+import { TagMappingSchemaComponent }                from "./tagMappingSchema/tagMappingSchema.component";
 import { ResultComponent }                          from './result/result.component';
 
 /* App Router */
@@ -49,6 +50,7 @@ import { WorkflowService }                          from './workflow/workflow.se
                     IgsConfigComponent,
                     PredixGlobalConfigComponent,
                     PredixCloudConfigComponent,
+                    TagMappingSchemaComponent,
                     ResultComponent
                   ],
     

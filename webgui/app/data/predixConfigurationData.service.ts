@@ -1,9 +1,7 @@
 import { Injectable }               from '@angular/core';
 
 import {
-    PredixConfigurationData,
-    IgsConfig,
-    PredixGlobalConfig, PredixCloudConfig
+    PredixConfigurationData, IgsConfig, PredixGlobalConfig, PredixCloudConfig, TagMappingSchema
 } from './predixConfigurationData.model';
 
 import { WorkflowService }          from '../workflow/workflow.service';
@@ -16,6 +14,7 @@ export class PredixConfigurationDataService {
     private isIgsConfigValid:           boolean = false;
     private isPredixGlobalConfigValid:  boolean = false;
     private isPredixCloudConfigValid:   boolean = false;
+    private isTagMappingSchemaValid:    boolean = false;
 
     constructor(private workflowService: WorkflowService) {
         
@@ -121,6 +120,30 @@ export class PredixConfigurationDataService {
         
     }
     
+    // Return the TagMappingSchema data
+    getTagMappingSchema(): TagMappingSchema {
+        
+        let tagMappingSchema = new TagMappingSchema();
+    
+        tagMappingSchema.TAG_MAPPING_SCHEMA = this.predixConfigurationData.TAG_MAPPING_SCHEMA;
+        
+        return tagMappingSchema;
+        
+    }
+    
+    // Set the TagMappingSchema data
+    setTagMappingSchema(data: TagMappingSchema) {
+        
+        // Update the PredixGlobalConfig data only when the PredixGlobalConfig Form had been validated successfully
+        this.isTagMappingSchemaValid = true;
+        
+        this.predixConfigurationData.TAG_MAPPING_SCHEMA = data.TAG_MAPPING_SCHEMA;
+        
+        // Validate PredixGlobalConfig Step in Workflow
+        this.workflowService.validateStep(STEPS.tagMappingSchema);
+        
+    }
+    
     getPredixConfigurationData() {
         return this.predixConfigurationData;
     }
@@ -132,7 +155,7 @@ export class PredixConfigurationDataService {
 
         // Return the form data after all this.* members had been reset
         this.predixConfigurationData.clear();
-        this.isIgsConfigValid = this.isPredixGlobalConfigValid = false;
+        this.isIgsConfigValid = this.isPredixGlobalConfigValid = this.isTagMappingSchemaValid = false;
 
         return this.predixConfigurationData;
     }
@@ -140,7 +163,7 @@ export class PredixConfigurationDataService {
     isPredixConfigurationDataValid() {
 
         // Return true if all forms had been validated successfully; otherwise, return false
-        return this.isIgsConfigValid && this.isPredixGlobalConfigValid
+        return this.isIgsConfigValid && this.isPredixGlobalConfigValid && this.isTagMappingSchemaValid;
 
     }
 
