@@ -4,7 +4,7 @@
 import json, os, pickle
 from lxml import etree
 
-JSON_CONFIG_FILE = "predixConfigGenerator.json"
+JSON_CONFIG_FILE = "../schema/your-factory.json"
 JSON_CONFIG_DATA = json.loads(open(JSON_CONFIG_FILE).read())
 
 def prepareProxyPredixMachineConfigurationFile(content, config = JSON_CONFIG_DATA):
@@ -127,7 +127,7 @@ for siteName, sitesGroups in JSON_CONFIG_DATA['SITES'].iteritems():
 # STEP 1: create configuration file content - prepare header of file
 dummy = \
 	prepareOpcuaPredixMachineConfigurationFileStruct(
-		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['OPCUA_DATANODES']]['CONTENT']
+		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG']['FILES'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['OPCUA_DATANODES']]['CONTENT']
 	)
 
 # STEP 2: create configuration file content - prepare header of file
@@ -145,7 +145,7 @@ createFile(JSON_CONFIG_DATA['GLOBAL_CONFIG']['OUTPUT_DIR']+JSON_CONFIG_DATA['PRE
 # STEP 1: create configuration file content - prepare file
 dummy = \
 	prepareOpcuaPredixMachineConfigurationFile(
-		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['OPCUA_DATANODES']]['CONFIG']
+		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG']['FILES'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['OPCUA_DATANODES']]['CONFIG']
 	)
 
 # STEP 2 save file
@@ -159,7 +159,7 @@ createFile(JSON_CONFIG_DATA['GLOBAL_CONFIG']['OUTPUT_DIR']+JSON_CONFIG_DATA['PRE
 # STEP 1: create configuration file content - prepare file
 dummy = \
 	prepareHooverSpillwayPredixMachineConfigurationFile(
-		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['HOOVER_SPILLWAY']]['CONTENT']
+		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG']['FILES'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['HOOVER_SPILLWAY']]['CONTENT']
 	)
 
 # STEP 2 save file
@@ -173,7 +173,7 @@ createFile(JSON_CONFIG_DATA['GLOBAL_CONFIG']['OUTPUT_DIR']+JSON_CONFIG_DATA['PRE
 # STEP 1: create configuration file content - prepare file
 dummy = \
 	preparePredixCloudIdentityConfigurationFile(
-		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['PREDIX_CLOUD_IDENTITY']]['CONTENT']
+		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG']['FILES'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['PREDIX_CLOUD_IDENTITY']]['CONTENT']
 	)
 
 # STEP 2 save file
@@ -187,7 +187,7 @@ createFile(JSON_CONFIG_DATA['GLOBAL_CONFIG']['OUTPUT_DIR']+JSON_CONFIG_DATA['PRE
 # STEP 1: create configuration file content - prepare file
 dummy = \
 	prepareWebSocketRiverPredixMachineConfigurationFile(
-		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['PREDIX_WEBSOCKER_RIVER']]['CONTENT']
+		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG']['FILES'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['PREDIX_WEBSOCKER_RIVER']]['CONTENT']
 	)
 
 # STEP 2 save file
@@ -201,7 +201,7 @@ createFile(JSON_CONFIG_DATA['GLOBAL_CONFIG']['OUTPUT_DIR']+JSON_CONFIG_DATA['PRE
 # STEP 1: create configuration file content - prepare file
 dummy = \
 	prepareProxyPredixMachineConfigurationFile(
-		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['PROXY_CONFIGURATION']]['CONTENT']
+		JSON_CONFIG_DATA['PREDIX_MACHINE_CONFIG']['FILES'][JSON_CONFIG_DATA['PREDIX_GLOBAL_CONFIG']['PROXY_CONFIGURATION']]['CONTENT']
 	)
 
 # STEP 2 save file

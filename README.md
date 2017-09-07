@@ -24,9 +24,15 @@ The tool is intended for both Predix dev / common users. I prepared two differen
 
 ### <a name="oldschoolway"></a> How it works: old-school way
 
-The only script you need is the python script under the folder ```cli/``` named ```predix-configurator.py```: you can run it from your command line simply moving in the ```cli/``` folder and running:
+The only script you need is the python script under the folder ```cli/``` named ```predix-configurator.py```. The script has only one dependency to pretty print xml to file.
+You can run it from your command line simply following this step:
  
  ```
+ git clone https://github.com/made2591/predix-configurator
+ cd predix-configurator
+ cd cli
+ #[optional create venv] virtualenv .venv & source .venv/bin/activate
+ pip install requirements.txt
  python predix-configurator.py
  ```
  
@@ -73,7 +79,8 @@ The ```PREDIX_GLOBAL_CONFIG``` key in the root of JSON specify [Predix Machine](
 
 	},
 ```
-The ```PREDIX_CLOUD_CONFIG``` key in the root of JSON specify [Predix Cloud](https://www.ge.com/digital/predix) most-important configuration parameters. Here you can define your timeseries Zone-ID (env vars), UAA parameters and proxy (if needed by your organization).
+The ```PREDIX_CLOUD_CONFIG``` key in the root of JSON specify [Predix Cloud](https://www.ge.com/digital/predix) most-important configuration parameters. Here you can define your timeseries Zone-ID (env vars), UAA parameters and proxy (if needed by your organization) with exceptions.
+The files involved by these keys are the one pointed by ```PREDIX_GLOBAL_CONFIG.PREDIX_WEBSOCKER_RIVER```, ```PREDIX_GLOBAL_CONFIG.PREDIX_CLOUD_IDENTITY``` and ```PREDIX_GLOBAL_CONFIG.PROXY_CONFIGURATION```.
 ```
 	"PREDIX_CLOUD_CONFIG" : {
 

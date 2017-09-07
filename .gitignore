@@ -116,3 +116,6 @@ webgui/app/navbar
 
 # personal
 webgui/app/data/predixConfigurationData.model.ts.bak
+
+# produced files
+config/
