@@ -23,17 +23,34 @@ export class PredixCloudConfigComponent implements OnInit {
     ngOnInit() {
         this.predixCloudConfig = this.predixConfigurationDataService.getPredixCloudConfig();
         this.exceptionsForm = this.formBuilder.group({
-            exceptions: this.formBuilder.array([])
+            exceptionName: [''],
+            exceptionList: this.formBuilder.array([])
         });
         console.log('PredixCloudConfig feature loaded!');
     }
     
+    submit(value) {
+        console.log(value);
+    }
+    
     addException() {
-        (<FormArray>this.exceptionsForm.get('exceptions')).push(new FormControl());
+        const control = <FormArray>this.exceptionsForm.controls['exceptionList'];
+        let newException = this.exceptionsForm.get('exceptionName').value;
+        if(newException !== null && newException.length > 0 && this.predixCloudConfig.PROXY_EXCEPTIONS.indexOf(newException) == -1) {
+            control.push(new FormControl(newException));
+            this.predixCloudConfig.PROXY_EXCEPTIONS = control.getRawValue();
+        } else {
+            console.log("Already added");
+        }
+        this.exceptionsForm.get('exceptionName').reset()
+        console.log(this.predixCloudConfig.PROXY_EXCEPTIONS);
     }
     
     removeException(i: number) {
-        (<FormArray>this.exceptionsForm.get('exceptions')).removeAt(i);
+        const control = <FormArray>this.exceptionsForm.controls['exceptionList'];
+        control.removeAt(i);
+        this.predixCloudConfig.PROXY_EXCEPTIONS = control.getRawValue();
+        console.log(this.predixCloudConfig.PROXY_EXCEPTIONS);
     }
     
     save(form: any) {

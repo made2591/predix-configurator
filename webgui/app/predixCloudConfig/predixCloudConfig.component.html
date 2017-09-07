@@ -10,48 +10,36 @@
             <p class="light" for="globalconfigsuffix"><b>TIMESERIES_ZONE_ID</b>: This is the ZONE ID (cf env main app name) needed to define timeseries.</p>
             <input class="form-control input-md" #globalconfigsuffix="ngModel" required id="globalconfigsuffix" name="globalconfigsuffix" type="text" placeholder="TIMESERIES_ZONE_ID" [(ngModel)]="predixCloudConfig.TIMESERIES_ZONE_ID">
         </div>
-        <p class="light-blue-text center" style="margin: 0 1%;">The following name define default file names for configuration of Predix Stack from edge to cloud.</p>
+        <p class="light-blue-text center" style="margin: 0 1%;">The following parameters are needed to communicate with Predix Cloud.</p>
         <div class='row'>
             <div class="input-field col s12">
-                <p class="light" for="datatypeconfigsuffix"><b>URL_OAUTH_TOKEN</b>: The following name define default file names for configuration of Predix Stack from edge to cloud.</p>
+                <p class="light" for="datatypeconfigsuffix"><b>URL_OAUTH_TOKEN</b>: The oauth token url (UAA)</p>
                 <input class="form-control input-md" #datatypeconfigsuffix="ngModel" required id="datatypeconfigsuffix" name="datatypeconfigsuffix" type="text" placeholder="URL_OAUTH_TOKEN" [(ngModel)]="predixCloudConfig.URL_OAUTH_TOKEN">
             </div>
-            <div class="input-field col s6">
-                <p class="light" for="opcuadatanodes"><b>APP_CLIENT_ID</b>: Default "com.ge.dspmicro.machineadapter.opcua-0"</p>
+            <div class="input-field col s7">
+                <p class="light" for="opcuadatanodes"><b>APP_CLIENT_ID</b> - Note: client ID must be enable to work with timeseries pointed before</p>
                 <input class="form-control input-md" #opcuadatanodes="ngModel" required id="opcuadatanodes" name="opcuadatanodes" type="text" placeholder="APP_CLIENT_ID" [(ngModel)]="predixCloudConfig.APP_CLIENT_ID">
             </div>
-            <div class="input-field col s6">
-                <p class="light" for="hooverspillway"><b>APP_CLIENT_SECRET</b>: Default "com.ge.dspmicro.machineadapter.opcua-0"</p>
+            <div class="input-field col s5">
+                <p class="light" for="hooverspillway"><b>APP_CLIENT_SECRET</b></p>
                 <input class="form-control input-md" #hooverspillway="ngModel" required id="hooverspillway" name="hooverspillway" type="text" placeholder="APP_CLIENT_SECRET" [(ngModel)]="predixCloudConfig.APP_CLIENT_SECRET">
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s9">
-                <p class="light" for="predixcloudidentity"><b>PROXY_HOST</b>: Default "com.ge.dspmicro.machineadapter.opcua-0"</p>
-                <input class="form-control input-md" #predixcloudidentity="ngModel" required id="proxyhost" name="proxyhost" type="text" placeholder="PROXY_HOST" [(ngModel)]="predixCloudConfig.PROXY_HOST">
+            <div class="input-field col s8">
+                <p class="light" for="proxyhost"><b>PROXY_HOST</b>: This is the host of proxy if your company is behind a firewall.</p>
+                <input class="form-control input-md" #predixcloudidentity="ngModel" id="proxyhost" name="proxyhost" type="text" placeholder="PROXY_HOST" [(ngModel)]="predixCloudConfig.PROXY_HOST">
             </div>
-            <div class="input-field col s3">
-                <a class="btn-floating btn-small waves-effect waves-light light-blue" id="addproxyexception" name="addproxyexception" (click)="addException();"><i class="material-icons">add</i></a>
-            </div>
-            <form [formGroup]="exceptionsForm">
-                <div formArrayName="exceptions">
-                    <div class="input-field col s12">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Host exceptions</th>
-                            </tr>
-                            </thead>
-                            <tbody id="PROXY_EXCEPTIONS">
-                            <tr *ngFor="let prop of exceptionsForm.get('exceptions').controls; let i = index" >
-                                <td>
-                                    <input type="text" class="form-control" [formControlName]="i" style="width: 80%; margin-right: 10%;">
-                                    <a class="btn-floating btn-small waves-effect waves-light red" id="removeproxyexception" name="removeproxyexception" (click)='removeException("i");'><i class="material-icons">remove</i></a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <form [formGroup]="exceptionsForm" (ngSubmit)="submit(exceptionsForm.get('exceptionList').value)">
+                <div class="input-field col s3">
+                    <p class="light" for="proxyexception"><b>PROXY_EXCEPTION</b></p>
+                    <input class="form-control input-md" formControlName="exceptionName" id="proxyexception" name="proxyexception" type="text" placeholder="PROXY_EXCEPTION" value="">
+                </div>
+                <div class="input-field col s1">
+                    <a class="btn-floating btn-small waves-effect waves-light light-blue" id="addproxyexception" name="addproxyexception" (click)="addException();" style="margin-top: 50px;"><i class="material-icons">add</i></a>
+                </div>
+                <div class="input-field col s12" formArrayName="exceptionList">
+                    <div *ngFor="let exception of exceptionsForm.get('exceptionList').controls; let i = index" class="chip">{{exception.value}}<i class="close material-icons" (click)="removeException(i);">close</i></div>
                 </div>
             </form>
             <div class="row">
