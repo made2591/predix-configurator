@@ -123,11 +123,7 @@ export class PredixConfigurationDataService {
     // Return the TagMappingSchema data
     getTagMappingSchema(): TagMappingSchema {
         
-        let tagMappingSchema = new TagMappingSchema();
-    
-        tagMappingSchema.TAG_MAPPING_SCHEMA = this.predixConfigurationData.TAG_MAPPING_SCHEMA;
-        
-        return tagMappingSchema;
+        return this.predixConfigurationData.TAG_MAPPING_SCHEMA;
         
     }
     
@@ -137,7 +133,7 @@ export class PredixConfigurationDataService {
         // Update the PredixGlobalConfig data only when the PredixGlobalConfig Form had been validated successfully
         this.isTagMappingSchemaValid = true;
         
-        this.predixConfigurationData.TAG_MAPPING_SCHEMA = data.TAG_MAPPING_SCHEMA;
+        this.predixConfigurationData.TAG_MAPPING_SCHEMA = data;
         
         // Validate PredixGlobalConfig Step in Workflow
         this.workflowService.validateStep(STEPS.tagMappingSchema);

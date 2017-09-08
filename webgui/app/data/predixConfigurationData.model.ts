@@ -5,8 +5,8 @@ export class PredixConfigurationData {
     PREDIX_GLOBAL_CONFIG: PredixGlobalConfig    = new PredixGlobalConfig();
     PREDIX_CLOUD_CONFIG: PredixCloudConfig      = new PredixCloudConfig();
     PREDIX_MACHINE_CONFIG: PredixMachineConfig  = new PredixMachineConfig();
-    SITES: Sites                                = new Sites();
     TAG_MAPPING_SCHEMA: TagMappingSchema        = new TagMappingSchema();
+    SITES: Sites                          = new Sites();
     
     setDefault() {
 
@@ -218,7 +218,9 @@ export class Sites {
     
     SITES: { [SITE_NAME: string] : SITE; } = {};
     
-    setDefault() {}
+    setDefault() {
+        this.SITES = {};
+    }
     
     clear() {
         this.SITES = {};
@@ -226,25 +228,20 @@ export class Sites {
     
 }
 
-export class MappingSchema {
+interface MappingSchema {
     
     CHANNEL_PREFIX: string;
-    MAPPING: { [CLOUD_TAG: string] : string; } = {};
-    
-    setDefault() {}
-    
-    clear() {
-        this.CHANNEL_PREFIX = '';
-        this.MAPPING = {};
-    }
+    TAGS_MAPPING: {};
     
 }
 
 export class TagMappingSchema {
     
-    TAG_MAPPING_SCHEMA: { [TAG_MAPPING_SCHEMA_NAME: string] : MappingSchema; } = {};
+    TAG_MAPPING_SCHEMA: { [TAG_MAPPING_SCHEMA_NAME: string] : MappingSchema; }  = {};
     
-    setDefault() {}
+    setDefault() {
+        this.TAG_MAPPING_SCHEMA = {};
+    }
     
     clear() {
         this.TAG_MAPPING_SCHEMA = {};

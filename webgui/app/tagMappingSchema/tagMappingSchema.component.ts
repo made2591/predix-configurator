@@ -14,14 +14,36 @@ export class TagMappingSchemaComponent implements OnInit {
     description = 'To setup your factory you need to create mapping between time series instance and tag of IGS instance.';
     tagMappingSchema: TagMappingSchema;
     form: any;
+    tagMappingSchemaWrapper: FormGroup;
     
     constructor(private predixConfigurationDataService: PredixConfigurationDataService, private formBuilder: FormBuilder) {
-        
     }
     
     ngOnInit() {
         this.tagMappingSchema = this.predixConfigurationDataService.getTagMappingSchema();
+        this.tagMappingSchemaWrapper = this.formBuilder.group({
+            tagMappingSchemaFormArray: this.formBuilder.array([
+                this.addTagMappingSchemaForm()
+            ])
+        });
         console.log('TagMappingSchema feature loaded!');
+    }
+    
+    addTagMappingSchemaForm() {
+        return this.formBuilder.group({
+            mappingSchemaName: [''],
+            channelPrefix: [''],
+            mappingSchemaDict: this.formBuilder.array([
+                this.addTagMappingSchemaDict()
+            ])
+        });
+    }
+    
+    addTagMappingSchemaDict() {
+        return this.formBuilder.group({
+            tagFrom: [''],
+            tagTo: [''],
+        });
     }
     
     save(form: any) {

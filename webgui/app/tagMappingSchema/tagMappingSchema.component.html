@@ -1,4 +1,4 @@
-<form #tagMappingSchemaForm="ngForm" class="editForm" novalidate>
+<form #tagMappingSchemaForms="ngForm" class="editForm" novalidate>
     <div class="col s12 center">
         <h5 class="center">{{title}}</h5>
         <p class="light center">{{description}}</p>
@@ -6,15 +6,48 @@
     </div>
 
     <div class="tab-pane fade in active">
-        <div class="input-field col s6">
-            <p class="light" for="globalconfigsuffix"><b>TIMESERIES_ZONE_ID</b>: This is the ZONE ID (cf env main app name) needed to define timeseries.</p>
-            <input class="form-control input-md" #globalconfigsuffix="ngModel" required id="globalconfigsuffix" name="globalconfigsuffix" type="text" placeholder="TIMESERIES_ZONE_ID" [(ngModel)]="tagMappingSchema.TAG_MAPPING_SCHEMA">
-        </div>
+        <form [formGroup]="tagMappingSchemaWrapper">
+
+            <div formArrayName="tagMappingSchemaFormArray">
+                <div *ngFor="let tagMappingSchemaForm of tagMappingSchemaWrapper.get('tagMappingSchemaFormArray').controls; let tmi = index">
+
+                    <div [formGroupName]="tmi">
+
+                        <div class="row">
+                            <div [formGroupName]="mci" class="input-field col s6">
+                                <input class="form-control input-md" type="text" placeholder="mappingSchemaName" formControlName="mappingSchemaName">
+                            </div>
+                            <div [formGroupName]="mci" class="input-field col s6">
+                                <input class="form-control input-md" type="text" placeholder="channelPrefix" formControlName="channelPrefix">
+                            </div>
+
+                            <div formArrayName="mappingSchemaDict">
+                                <div *ngFor="let tagMappingSchemaCouple of tagMappingSchemaForm.get('mappingSchemaDict'); let mci=index">
+                                    <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+                                    <div [formGroupName]="mci" class="input-field col s6">
+                                        <input class="form-control input-md" type="text" placeholder="tagFrom" formControlName="tagFrom">
+                                    </div>
+                                    <div [formGroupName]="mci" class="input-field col s6">
+                                        <input class="form-control input-md" type="text" placeholder="tagTo" formControlName="tagTo">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--display error message if street is not valid-->
+                            <!--<small [hidden]="tagMappingSchemaForms.controls.tagMappingSchemaList.controls[i].controls.tagMappingSchemaName.valid">-->
+                                <!--Street is required-->
+                            <!--</small>-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="row">
         <div class="input-field col s12" style="text-align: center;">
-            <button uiSref="predixCloudConfig" class="btn btn-outline-rounded btn-default" (click)="save(tagMappingSchemaForm)">Previous Step
+            <button uiSref="predixCloudConfig" class="btn btn-outline-rounded btn-default" (click)="save(tagMappingSchemaForms)">Previous Step
                 <i class="material-icons right">navigate_before</i>
             </button>
             <button class="btn waves-effect waves-light red" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
@@ -23,7 +56,7 @@
             <button class="btn waves-effect waves-light green" style="margin: 5px auto;" name="load" id="load" (click)="tagMappingSchema.setDefault();">Load Conf
                 <i class="material-icons right">file_upload</i>
             </button>
-            <button uiSref="result" class="btn btn-success btn-outline-rounded btn-info" [disabled]="!tagMappingSchemaForm.valid" (click)="save(tagMappingSchemaForm)">Next Step
+            <button uiSref="result" class="btn btn-success btn-outline-rounded btn-info" [disabled]="!tagMappingSchemaForms.valid" (click)="save(tagMappingSchemaForms)">Next Step
                 <i class="material-icons right">navigate_next</i>
             </button>
         </div>
