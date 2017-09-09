@@ -21,29 +21,43 @@ export class TagMappingSchemaComponent implements OnInit {
     
     ngOnInit() {
         this.tagMappingSchema = this.predixConfigurationDataService.getTagMappingSchema();
+        // we will initialize our form here
         this.tagMappingSchemaWrapper = this.formBuilder.group({
-            tagMappingSchemaFormArray: this.formBuilder.array([
-                this.addTagMappingSchemaForm()
+            tagMappingSchemaForms: this.formBuilder.array([
+                this.initTagMappingSchemaForm(),
             ])
         });
         console.log('TagMappingSchema feature loaded!');
     }
     
-    addTagMappingSchemaForm() {
+    initTagMappingSchemaForm() {
+        // initialize our address
         return this.formBuilder.group({
             mappingSchemaName: [''],
             channelPrefix: [''],
             mappingSchemaDict: this.formBuilder.array([
-                this.addTagMappingSchemaDict()
+                this.initMappingSchemaForm()
             ])
         });
     }
     
-    addTagMappingSchemaDict() {
+    initMappingSchemaForm() {
         return this.formBuilder.group({
             tagFrom: [''],
             tagTo: [''],
-        });
+        })
+    }
+    
+    addNewTagMappingSchema() {
+        // add address to the list
+        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
+        control.push(this.initTagMappingSchemaForm());
+    }
+    
+    removeNewTagMappingSchema(i: number) {
+        // remove address from the list
+        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
+        control.removeAt(i);
     }
     
     save(form: any) {

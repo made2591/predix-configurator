@@ -6,43 +6,38 @@
     </div>
 
     <div class="tab-pane fade in active">
-        <form [formGroup]="tagMappingSchemaWrapper">
-
-            <div formArrayName="tagMappingSchemaFormArray">
-                <div *ngFor="let tagMappingSchemaForm of tagMappingSchemaWrapper.get('tagMappingSchemaFormArray').controls; let tmi = index">
-
-                    <div [formGroupName]="tmi">
-
-                        <div class="row">
-                            <div [formGroupName]="mci" class="input-field col s6">
-                                <input class="form-control input-md" type="text" placeholder="mappingSchemaName" formControlName="mappingSchemaName">
+        <div class='row'>
+            <form [formGroup]="tagMappingSchemaWrapper" novalidate (ngSubmit)="save(tagMappingSchemaWrapper)">
+                <div formArrayName="tagMappingSchemaForms">
+                    <div *ngFor="let tagMappingSchemaForm of tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls; let formIndex=index">
+                        <!--<div>-->
+                            <!--<span>Form {{i + 1}}</span>-->
+                            <!--<span *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length > 1" (click)="removeNewTagMappingSchema(i)"></span>-->
+                        <!--</div>-->
+                        <div [formGroupName]="formIndex" class="row">
+                            <div class="input-field col s6">
+                                <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="mappingSchemaName" formControlName="mappingSchemaName">
                             </div>
-                            <div [formGroupName]="mci" class="input-field col s6">
-                                <input class="form-control input-md" type="text" placeholder="channelPrefix" formControlName="channelPrefix">
+                            <div class="input-field col s6">
+                                <input class="form-control input-md" name="channelPrefix" type="text" placeholder="channelPrefix" formControlName="channelPrefix">
                             </div>
-
                             <div formArrayName="mappingSchemaDict">
-                                <div *ngFor="let tagMappingSchemaCouple of tagMappingSchemaForm.get('mappingSchemaDict'); let mci=index">
-                                    <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
-                                    <div [formGroupName]="mci" class="input-field col s6">
-                                        <input class="form-control input-md" type="text" placeholder="tagFrom" formControlName="tagFrom">
-                                    </div>
-                                    <div [formGroupName]="mci" class="input-field col s6">
-                                        <input class="form-control input-md" type="text" placeholder="tagTo" formControlName="tagTo">
+                                <div *ngFor="let mappingCouple of tagMappingSchemaForm.controls.mappingSchemaDict.controls; let coupleTagIndex=index">
+                                    <div [formGroupName]="coupleTagIndex" class="row">
+                                        <div class="input-field col s6">
+                                            <input class="form-control input-md" name="tagFrom" type="text" placeholder="tagFrom" formControlName="tagFrom">
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input class="form-control input-md" name="tagTo" type="text" placeholder="tagTo" formControlName="tagTo">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!--display error message if street is not valid-->
-                            <!--<small [hidden]="tagMappingSchemaForms.controls.tagMappingSchemaList.controls[i].controls.tagMappingSchemaName.valid">-->
-                                <!--Street is required-->
-                            <!--</small>-->
-
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
     <div class="row">
