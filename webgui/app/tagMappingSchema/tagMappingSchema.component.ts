@@ -57,14 +57,14 @@ export class TagMappingSchemaComponent implements OnInit {
     }
     
     addTagCouple(fi: number) {
-        console.log(<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'].controls[fi].controls['mappingSchemaDict']);
-        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'].controls[fi].controls['mappingSchemaDict'];
+        console.log(<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']);
+        const control = <FormArray>(<FormArray>(<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[fi]).controls['mappingSchemaDict'];
         control.push(this.initMappingSchemaForm());
     }
     
     removeTagCouple(fi: number, ti: number) {
-        console.log(<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'].controls[fi].controls['mappingSchemaDict']);
-        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'].controls[fi].controls['mappingSchemaDict'];
+        console.log(<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']);
+        const control = <FormArray>(<FormArray>(<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[fi]).controls['mappingSchemaDict'];
         control.removeAt(ti);
     }
     
