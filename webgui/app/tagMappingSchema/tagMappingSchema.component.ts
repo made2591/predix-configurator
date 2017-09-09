@@ -21,7 +21,6 @@ export class TagMappingSchemaComponent implements OnInit {
     
     ngOnInit() {
         this.tagMappingSchema = this.predixConfigurationDataService.getTagMappingSchema();
-        // we will initialize our form here
         this.tagMappingSchemaWrapper = this.formBuilder.group({
             tagMappingSchemaForms: this.formBuilder.array([
                 this.initTagMappingSchemaForm(),
@@ -31,7 +30,6 @@ export class TagMappingSchemaComponent implements OnInit {
     }
     
     initTagMappingSchemaForm() {
-        // initialize our address
         return this.formBuilder.group({
             mappingSchemaName: [''],
             channelPrefix: [''],
@@ -41,6 +39,16 @@ export class TagMappingSchemaComponent implements OnInit {
         });
     }
     
+    addNewTagMappingSchema() {
+        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
+        control.push(this.initTagMappingSchemaForm());
+    }
+    
+    removeNewTagMappingSchema(i: number) {
+        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
+        control.removeAt(i);
+    }
+    
     initMappingSchemaForm() {
         return this.formBuilder.group({
             tagFrom: [''],
@@ -48,16 +56,16 @@ export class TagMappingSchemaComponent implements OnInit {
         })
     }
     
-    addNewTagMappingSchema() {
-        // add address to the list
-        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
-        control.push(this.initTagMappingSchemaForm());
+    addTagCouple(fi: number) {
+        console.log(<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'].controls[fi].controls['mappingSchemaDict']);
+        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'].controls[fi].controls['mappingSchemaDict'];
+        control.push(this.initMappingSchemaForm());
     }
     
-    removeNewTagMappingSchema(i: number) {
-        // remove address from the list
-        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
-        control.removeAt(i);
+    removeTagCouple(fi: number, ti: number) {
+        console.log(<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'].controls[fi].controls['mappingSchemaDict']);
+        const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'].controls[fi].controls['mappingSchemaDict'];
+        control.removeAt(ti);
     }
     
     save(form: any) {

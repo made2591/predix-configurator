@@ -6,38 +6,80 @@
     </div>
 
     <div class="tab-pane fade in active">
-        <div class='row'>
-            <form [formGroup]="tagMappingSchemaWrapper" novalidate (ngSubmit)="save(tagMappingSchemaWrapper)">
-                <div formArrayName="tagMappingSchemaForms">
-                    <div *ngFor="let tagMappingSchemaForm of tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls; let formIndex=index">
-                        <!--<div>-->
-                            <!--<span>Form {{i + 1}}</span>-->
-                            <!--<span *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length > 1" (click)="removeNewTagMappingSchema(i)"></span>-->
-                        <!--</div>-->
-                        <div [formGroupName]="formIndex" class="row">
-                            <div class="input-field col s6">
-                                <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="mappingSchemaName" formControlName="mappingSchemaName">
+        <form [formGroup]="tagMappingSchemaWrapper" novalidate (ngSubmit)="save(tagMappingSchemaWrapper)">
+            <div formArrayName="tagMappingSchemaForms">
+                <div *ngFor="let tagMappingSchemaForm of tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls; let formIndex=index">
+                    <div [formGroupName]="formIndex" class="row" style="background-color: #F1F1F1; border: none; border: 1px solid #c7c7c7; border-radius: 0;">
+                        <div *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length > 1">
+                            <div class="input-field col s5">
+                                <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="Tag Mapping Group Name" formControlName="mappingSchemaName">
                             </div>
-                            <div class="input-field col s6">
-                                <input class="form-control input-md" name="channelPrefix" type="text" placeholder="channelPrefix" formControlName="channelPrefix">
+                            <div class="input-field col s5">
+                                <input class="form-control input-md" name="channelPrefix" type="text" placeholder="Channel Mapping Prefix" formControlName="channelPrefix">
                             </div>
-                            <div formArrayName="mappingSchemaDict">
-                                <div *ngFor="let mappingCouple of tagMappingSchemaForm.controls.mappingSchemaDict.controls; let coupleTagIndex=index">
-                                    <div [formGroupName]="coupleTagIndex" class="row">
-                                        <div class="input-field col s6">
+                            <div class="input-field col s1 center-align">
+                                <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addNewTagMappingSchema();"><i class="material-icons">add</i></a>
+                            </div>
+                            <div class="input-field col s1 center-align">
+                                <a class="btn-floating btn-small waves-effect waves-light red" name="removeTagCouple" (click)="removeNewTagMappingSchema(formIndex);"><i class="material-icons">delete</i></a>
+                            </div>
+                        </div>
+                        <div *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length <= 1">
+                            <div class="input-field col s6">
+                                <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="Tag Mapping Group Name" formControlName="mappingSchemaName">
+                            </div>
+                            <div class="input-field col s5">
+                                <input class="form-control input-md" name="channelPrefix" type="text" placeholder="Channel Mapping Prefix" formControlName="channelPrefix">
+                            </div>
+                            <div class="input-field col s1 center-align">
+                                <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addNewTagMappingSchema();"><i class="material-icons">add</i></a>
+                            </div>
+                        </div>
+                        <div formArrayName="mappingSchemaDict">
+                            <div *ngFor="let mappingCouple of tagMappingSchemaForm.controls.mappingSchemaDict.controls; let coupleTagIndex=index">
+                                <div [formGroupName]="coupleTagIndex">
+                                    <div *ngIf="tagMappingSchemaForm.controls.mappingSchemaDict.controls.length > 1">
+                                        <div class="input-field col s4 offset-s1">
                                             <input class="form-control input-md" name="tagFrom" type="text" placeholder="tagFrom" formControlName="tagFrom">
                                         </div>
-                                        <div class="input-field col s6">
+                                        <div class="input-field col s5">
                                             <input class="form-control input-md" name="tagTo" type="text" placeholder="tagTo" formControlName="tagTo">
+                                        </div>
+                                        <div class="input-field col s1 center-align">
+                                            <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addTagCouple(formIndex);"><i class="material-icons">add</i></a>
+                                        </div>
+                                        <div class="input-field col s1 center-align">
+                                            <a class="btn-floating btn-small waves-effect waves-light red" name="removeTagCouple" (click)="removeTagCouple(formIndex, coupleTagIndex);"><i class="material-icons">delete</i></a>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="tagMappingSchemaForm.controls.mappingSchemaDict.controls.length <= 1">
+                                        <div class="input-field col s5 offset-s1">
+                                            <input class="form-control input-md" name="tagFrom" type="text" placeholder="Predix Cloud Tag" formControlName="tagFrom">
+                                        </div>
+                                        <div class="input-field col s5">
+                                            <input class="form-control input-md" name="tagTo" type="text" placeholder="IGS Tag" formControlName="tagTo">
+                                        </div>
+                                        <div class="input-field col s1 center-align">
+                                            <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addTagCouple(formIndex);"><i class="material-icons">add</i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--<div class="row">-->
+                        <!--<div class="input-field col s12 center-align">-->
+                            <!--<button *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length > 1" class="btn btn-success btn-outline-rounded btn-info red" (click)="removeNewTagMappingSchema(formIndex)">Delete Group-->
+                                <!--<i class="material-icons right">delete</i>-->
+                            <!--</button>-->
+                            <!--<button class="btn btn-success btn-outline-rounded btn-info light-blue" (click)="addNewTagMappingSchema()">Add Group-->
+                                <!--<i class="material-icons right">add</i>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
     <div class="row">
