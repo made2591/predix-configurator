@@ -1,7 +1,7 @@
 import { Component, OnInit }                                            from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl }   from '@angular/forms';
 
-import { TagMappingSchema }                                             from '../data/predixConfigurationData.model';
+import { TagMappingSchema, MappingSchema }                              from '../data/predixConfigurationData.model';
 import { PredixConfigurationDataService }                               from '../data/predixConfigurationData.service';
 
 @Component ({
@@ -41,11 +41,30 @@ export class TagMappingSchemaComponent implements OnInit {
     
     addNewTagMappingSchema() {
         const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
+        //this.tagMappingSchema.TAG_MAPPING_SCHEMA[]
+        
+        const numberOfMappingSchema = (<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).length-1;
+        const mappingSchemaName = (<FormArray>
+            (<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[numberOfMappingSchema]).get('mappingSchemaName').value;
+        this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName] = new MappingSchema();
+        this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName].CHANNEL_PREFIX = (<FormArray>
+            (<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[numberOfMappingSchema]).get('channelPrefix').value;
+        
+        console.log(this.tagMappingSchema.TAG_MAPPING_SCHEMA);
+        
         control.push(this.initTagMappingSchemaForm());
     }
     
     removeNewTagMappingSchema(i: number) {
         const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
+    
+        const mappingSchemaName = (<FormArray>
+            (<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[i]).get('mappingSchemaName').value;
+    
+        delete this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName];
+    
+        console.log(this.tagMappingSchema.TAG_MAPPING_SCHEMA);
+        
         control.removeAt(i);
     }
     
@@ -58,13 +77,57 @@ export class TagMappingSchemaComponent implements OnInit {
     
     addTagCouple(fi: number) {
         console.log(<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']);
-        const control = <FormArray>(<FormArray>(<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[fi]).controls['mappingSchemaDict'];
+        const control = <FormArray>(
+            <FormArray>(
+                <FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[fi]).controls['mappingSchemaDict'];
+    
+        const mappingSchemaName = (<FormArray>
+            (<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[fi]).get('mappingSchemaName').value;
+        const numberOfMappingSchema = control.length-1;
+        const tagFrom = <FormGroup>(
+                                    <FormArray>(
+                                        <FormArray>(
+                                            <FormGroup>
+                                                this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']
+                                        ).controls[fi]
+                                    ).controls['mappingSchemaDict']
+                                ).controls[numberOfMappingSchema].get('tagFrom').value;
+        
+        this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName].TAGS_MAPPING['tagFrom'] = <FormGroup>(
+            <FormArray>(
+                <FormArray>(
+                    <FormGroup>
+                        this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']
+                ).controls[fi]
+            ).controls['mappingSchemaDict']
+        ).controls[numberOfMappingSchema].get('tagTo').value;
+
+        console.log(this.tagMappingSchema.TAG_MAPPING_SCHEMA);
+    
         control.push(this.initMappingSchemaForm());
     }
     
     removeTagCouple(fi: number, ti: number) {
         console.log(<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']);
-        const control = <FormArray>(<FormArray>(<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[fi]).controls['mappingSchemaDict'];
+        const control = <FormArray>(
+            <FormArray>(
+                <FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[fi]).controls['mappingSchemaDict'];
+
+        const mappingSchemaName = (<FormArray>
+            (<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[fi]).get('mappingSchemaName').value;
+        const tagFrom = <FormGroup>(
+            <FormArray>(
+                <FormArray>(
+                    <FormGroup>
+                        this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']
+                ).controls[fi]
+            ).controls['mappingSchemaDict']
+        ).controls[ti].get('tagFrom').value;
+        
+        delete this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName].TAGS_MAPPING[tagFrom];
+    
+        console.log(this.tagMappingSchema.TAG_MAPPING_SCHEMA);
+
         control.removeAt(ti);
     }
     

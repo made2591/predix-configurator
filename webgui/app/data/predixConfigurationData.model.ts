@@ -183,7 +183,7 @@ export class PredixMachineConfig {
     
 }
 
-interface MACHINE {
+export class Machine {
     PCU: string;
     IP: string;
     NAT: string;
@@ -197,7 +197,7 @@ export class MachineGroup {
     GLOBAL_TAG_MAPPING_SCHEMA: string;
     GLOBAL_ENABLE_SETUP: boolean;
     GLOBAL_PREFIX: string;
-    MACHINES: { [MACHINE_PLATE: string] : MACHINE; } = {};
+    MACHINES: { [MACHINE_PLATE: string] : Machine; } = {};
     
     setDefault() {}
     
@@ -210,13 +210,23 @@ export class MachineGroup {
     
 }
 
-interface SITE {
-    MACHINE_GROUPS: { [MACHINE_GROUP_NAME: string] : MachineGroup; }
+export class Site {
+
+    MACHINE_GROUPS: { [MACHINE_GROUP_NAME: string] : MachineGroup; };
+    
+    setDefault() {
+        this.MACHINE_GROUPS = {};
+    }
+    
+    clear() {
+        this.MACHINE_GROUPS = {};
+    }
+    
 }
 
 export class Sites {
     
-    SITES: { [SITE_NAME: string] : SITE; } = {};
+    SITES: { [SITE_NAME: string] : Site; } = {};
     
     setDefault() {
         this.SITES = {};
@@ -228,10 +238,20 @@ export class Sites {
     
 }
 
-interface MappingSchema {
+export class MappingSchema {
     
     CHANNEL_PREFIX: string;
     TAGS_MAPPING: {};
+    
+    setDefault() {
+        this.CHANNEL_PREFIX = '';
+        this.TAGS_MAPPING = {};
+    }
+    
+    clear() {
+        this.CHANNEL_PREFIX = '';
+        this.TAGS_MAPPING = {};
+    }
     
 }
 
