@@ -5,8 +5,8 @@ export class PredixConfigurationData {
     PREDIX_GLOBAL_CONFIG: PredixGlobalConfig    = new PredixGlobalConfig();
     PREDIX_CLOUD_CONFIG: PredixCloudConfig      = new PredixCloudConfig();
     PREDIX_MACHINE_CONFIG: PredixMachineConfig  = new PredixMachineConfig();
-    TAG_MAPPING_SCHEMA: TagMappingSchema        = new TagMappingSchema();
-    SITES: Sites                          = new Sites();
+    TAG_MAPPING_SCHEMA: { [TAG_MAPPING_SCHEMA_NAME: string] : MappingSchema; }  = {};
+    SITES: { [SITE_NAME: string] : Site; } = {};
     
     setDefault() {
 
@@ -15,16 +15,14 @@ export class PredixConfigurationData {
         this.PREDIX_GLOBAL_CONFIG   = new PredixGlobalConfig();
         this.PREDIX_CLOUD_CONFIG    = new PredixCloudConfig();
         this.PREDIX_MACHINE_CONFIG  = new PredixMachineConfig();
-        this.SITES                  = new Sites();
-        this.TAG_MAPPING_SCHEMA     = new TagMappingSchema();
     
         this.GLOBAL_CONFIG.setDefault();
         this.IGS_CONFIG.setDefault();
         this.PREDIX_GLOBAL_CONFIG.setDefault();
         this.PREDIX_CLOUD_CONFIG.setDefault();
         this.PREDIX_MACHINE_CONFIG.setDefault();
-        this.SITES.setDefault();
-        this.TAG_MAPPING_SCHEMA.setDefault();
+        this.SITES = {};
+        this.TAG_MAPPING_SCHEMA = {};
 
     }
     
@@ -224,55 +222,23 @@ export class Site {
     
 }
 
-export class Sites {
-    
-    SITES: { [SITE_NAME: string] : Site; } = {};
-    
-    setDefault() {
-        this.SITES = {};
-    }
-    
-    clear() {
-        this.SITES = {};
-    }
-    
-}
-
 export class MappingSchema {
     
     CHANNEL_PREFIX: string;
-    TAGS_MAPPING: { [TAG_FROM: string] : string; }  = {};
+    MAPPING: { [TAG_FROM: string] : string; }  = {};
     
     setDefault() {
         this.CHANNEL_PREFIX = '';
-        this.TAGS_MAPPING = {};
+        this.MAPPING = {};
     }
     
     getElementWithKey(key) {
-        return null || this.TAGS_MAPPING[key];
+        return null || this.MAPPING[key];
     }
     
     clear() {
         this.CHANNEL_PREFIX = '';
-        this.TAGS_MAPPING = {};
-    }
-    
-}
-
-export class TagMappingSchema {
-    
-    TAG_MAPPING_SCHEMA: { [TAG_MAPPING_SCHEMA_NAME: string] : MappingSchema; }  = {};
-    
-    getElementWithKey(key) {
-        return null || this.TAG_MAPPING_SCHEMA[key];
-    }
-    
-    setDefault() {
-        this.TAG_MAPPING_SCHEMA = {};
-    }
-    
-    clear() {
-        this.TAG_MAPPING_SCHEMA = {};
+        this.MAPPING = {};
     }
     
 }

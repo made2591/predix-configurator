@@ -1,7 +1,7 @@
 import { Component, OnInit }                                            from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl }   from '@angular/forms';
 
-import { TagMappingSchema, MappingSchema }                              from '../data/predixConfigurationData.model';
+import { MappingSchema }                                                from '../data/predixConfigurationData.model';
 import { PredixConfigurationDataService }                               from '../data/predixConfigurationData.service';
 
 @Component ({
@@ -13,8 +13,7 @@ export class TagMappingSchemaComponent implements OnInit {
     
     title = 'Step 4 - Tag Schema(s)';
     description = 'To setup your factory you need to create mapping between time series instance and tag of IGS instance.';
-    tagMappingSchema: TagMappingSchema;
-    mappingSchema: MappingSchema;
+    tagMappingSchema: {};
     form: any;
     tagMappingSchemaWrapper: FormGroup;
     
@@ -50,7 +49,7 @@ export class TagMappingSchemaComponent implements OnInit {
         const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
         let mappingSchemaName = (<FormArray>
             (<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[i]).get('mappingSchemaName').value;
-        console.log(this.tagMappingSchema.TAG_MAPPING_SCHEMA);
+        console.log(this.tagMappingSchema);
         control.removeAt(i);
     }
     
@@ -97,7 +96,7 @@ export class TagMappingSchemaComponent implements OnInit {
             // if the mappingSchemaName is not null in any sense
             if (mappingSchemaName !== null && mappingSchemaName.length > 0) {
                 // handle double names to
-                if (this.tagMappingSchema.getElementWithKey(mappingSchemaName) != null) {
+                if (mappingSchemaName in this.tagMappingSchema) {
                     mappingSchemaName = mappingSchemaName + (i.toString());
                 }
             }
@@ -107,14 +106,14 @@ export class TagMappingSchemaComponent implements OnInit {
             }
     
             // create MappingSchema Object
-            this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName] = new MappingSchema();
+            this.tagMappingSchema[mappingSchemaName] = new MappingSchema();
             // create Key in TAG_MAPPING_SCHEMA var
-            this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName].CHANNEL_PREFIX =
+            this.tagMappingSchema[mappingSchemaName].CHANNEL_PREFIX =
                 (<FormArray>
                     (<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'])
                         .controls[i]).get('channelPrefix').value;
             // create dictionary for tag couples
-            this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName].TAGS_MAPPING = {};
+            this.tagMappingSchema[mappingSchemaName].MAPPING = {};
 
             // get mappingSchemaControl to get all couples
             const mappingSchema = <FormGroup>(
@@ -142,7 +141,7 @@ export class TagMappingSchemaComponent implements OnInit {
                 // if the tagFrom is not null in any sense
                 if (tagFrom !== null && tagFrom.length > 0) {
                     // handle double names to
-                    if ((<MappingSchema>this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName]).getElementWithKey(tagFrom) != null) {
+                    if ((<MappingSchema>this.tagMappingSchema[mappingSchemaName]).getElementWithKey(tagFrom) != null) {
                         tagFrom = tagFrom + (k.toString());
                     }
                 }
@@ -151,7 +150,7 @@ export class TagMappingSchemaComponent implements OnInit {
                     tagFrom = "TAG_FROM"+(k.toString());
                 }
                 
-                this.tagMappingSchema.TAG_MAPPING_SCHEMA[mappingSchemaName].TAGS_MAPPING[tagFrom] = <FormGroup>(
+                this.tagMappingSchema[mappingSchemaName].MAPPING[tagFrom] = <FormGroup>(
                     <FormArray>(
                         <FormArray>(
                             <FormGroup>
@@ -164,7 +163,7 @@ export class TagMappingSchemaComponent implements OnInit {
             
         }
     
-        console.log(this.tagMappingSchema.TAG_MAPPING_SCHEMA);
+        console.log(this.tagMappingSchema);
     
         this.predixConfigurationDataService.setTagMappingSchema(this.tagMappingSchema);
 
