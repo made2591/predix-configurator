@@ -46,10 +46,10 @@
                                             <input class="form-control input-md" name="tagTo" type="text" placeholder="tagTo" formControlName="tagTo">
                                         </div>
                                         <div class="input-field col s1 center-align">
-                                            <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addTagCouple(formIndex);"><i class="material-icons">add</i></a>
+                                            <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addNewTagCouple(formIndex);"><i class="material-icons">add</i></a>
                                         </div>
                                         <div class="input-field col s1 center-align">
-                                            <a class="btn-floating btn-small waves-effect waves-light red" name="removeTagCouple" (click)="removeTagCouple(formIndex, coupleTagIndex);"><i class="material-icons">delete</i></a>
+                                            <a class="btn-floating btn-small waves-effect waves-light red" name="removeTagCouple" (click)="removeNewTagCouple(formIndex, coupleTagIndex);"><i class="material-icons">delete</i></a>
                                         </div>
                                     </div>
                                     <div *ngIf="tagMappingSchemaForm.controls.mappingSchemaDict.controls.length <= 1">
@@ -60,7 +60,7 @@
                                             <input class="form-control input-md" name="tagTo" type="text" placeholder="IGS Tag" formControlName="tagTo">
                                         </div>
                                         <div class="input-field col s1 center-align">
-                                            <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addTagCouple(formIndex);"><i class="material-icons">add</i></a>
+                                            <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addNewTagCouple(formIndex);"><i class="material-icons">add</i></a>
                                         </div>
                                     </div>
                                 </div>

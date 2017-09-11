@@ -241,11 +241,15 @@ export class Sites {
 export class MappingSchema {
     
     CHANNEL_PREFIX: string;
-    TAGS_MAPPING: {};
+    TAGS_MAPPING: { [TAG_FROM: string] : string; }  = {};
     
     setDefault() {
         this.CHANNEL_PREFIX = '';
         this.TAGS_MAPPING = {};
+    }
+    
+    getElementWithKey(key) {
+        return null || this.TAGS_MAPPING[key];
     }
     
     clear() {
@@ -258,6 +262,10 @@ export class MappingSchema {
 export class TagMappingSchema {
     
     TAG_MAPPING_SCHEMA: { [TAG_MAPPING_SCHEMA_NAME: string] : MappingSchema; }  = {};
+    
+    getElementWithKey(key) {
+        return null || this.TAG_MAPPING_SCHEMA[key];
+    }
     
     setDefault() {
         this.TAG_MAPPING_SCHEMA = {};
