@@ -115,28 +115,20 @@ export class TagMappingSchemaComponent implements OnInit {
             // create dictionary for tag couples
             this.tagMappingSchema[mappingSchemaName].MAPPING = {};
 
-            // get mappingSchemaControl to get all couples
-            const mappingSchema = <FormGroup>(
-                <FormArray>(
-                    <FormArray>(
-                        <FormGroup>
-                            this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']
-                    ).controls[i]
-                ).controls['mappingSchemaDict']
-            ).controls;
-
+            const mappingSchema = <FormArray>((<FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'])[i]).controls['mappingSchemaDict'];
+            
             // for each tagCouple
             for (let k = 0; k < mappingSchema.length; k++) {
 
                 // get Head
-                let tagFrom = <FormGroup>(
+                let tagFrom = (<FormGroup>(
                     <FormArray>(
                         <FormArray>(
                             <FormGroup>
                                 this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']
                         ).controls[i]
                     ).controls['mappingSchemaDict']
-                ).controls[k].get('tagFrom').value;
+                ).controls[k].get('tagFrom')).value;
     
                 // if the tagFrom is not null in any sense
                 if (tagFrom !== null && tagFrom.length > 0) {

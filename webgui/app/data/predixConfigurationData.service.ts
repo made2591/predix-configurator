@@ -1,7 +1,7 @@
 import { Injectable }               from '@angular/core';
 
 import {
-    PredixConfigurationData, IgsConfig, PredixGlobalConfig, PredixCloudConfig, TagMappingSchema
+    PredixConfigurationData, IgsConfig, PredixGlobalConfig, PredixCloudConfig
 } from './predixConfigurationData.model';
 
 import { WorkflowService }          from '../workflow/workflow.service';
@@ -121,14 +121,14 @@ export class PredixConfigurationDataService {
     }
     
     // Return the TagMappingSchema data
-    getTagMappingSchema(): TagMappingSchema {
+    getTagMappingSchema(): {} {
         
         return this.predixConfigurationData.TAG_MAPPING_SCHEMA;
         
     }
     
     // Set the TagMappingSchema data
-    setTagMappingSchema(data: TagMappingSchema) {
+    setTagMappingSchema(data: {}) {
         
         // Update the PredixGlobalConfig data only when the PredixGlobalConfig Form had been validated successfully
         this.isTagMappingSchemaValid = true;

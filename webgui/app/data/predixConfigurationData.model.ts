@@ -32,8 +32,8 @@ export class PredixConfigurationData {
         this.PREDIX_GLOBAL_CONFIG   = new PredixGlobalConfig();
         this.PREDIX_CLOUD_CONFIG    = new PredixCloudConfig();
         this.PREDIX_MACHINE_CONFIG  = new PredixMachineConfig();
-        this.SITES                  = new Sites();
-        this.TAG_MAPPING_SCHEMA     = new TagMappingSchema();
+        this.SITES                  = {};
+        this.TAG_MAPPING_SCHEMA     = {};
     }
     
 }
