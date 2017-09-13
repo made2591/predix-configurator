@@ -13,6 +13,7 @@ import { IgsConfigComponent }                       from './igsConfig/igsConfig.
 import { PredixGlobalConfigComponent }              from './predixGlobalConfig/predixGlobalConfig.component';
 import { PredixCloudConfigComponent }               from "./predixCloudConfig/predixCloudConfig.component";
 import { TagMappingSchemaComponent }                from "./tagMappingSchema/tagMappingSchema.component";
+import { SitesMachinesComponent }                   from "./sitesMachines/sitesMachines.component";
 import { ResultComponent }                          from './result/result.component';
 
 /* App Router */
@@ -53,6 +54,7 @@ import { WorkflowService }                          from './workflow/workflow.se
                     PredixGlobalConfigComponent,
                     PredixCloudConfigComponent,
                     TagMappingSchemaComponent,
+                    SitesMachinesComponent,
                     ResultComponent
                   ],
     

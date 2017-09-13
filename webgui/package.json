@@ -28,11 +28,12 @@
     "ui-router-ng2": "1.0.0-beta.4"
   },
   "devDependencies": {
+    "@types/node": "^6.0.46",
     "concurrently": "^3.1.0",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
     "lite-server": "^2.2.2",
-    "typescript": "~2.0.10",
-
-    "@types/node": "^6.0.46"
+    "typescript": "~2.0.10"
   },
   "repository": {}
 }

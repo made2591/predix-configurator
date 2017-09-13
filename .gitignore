@@ -119,3 +119,8 @@ webgui/app/data/predixConfigurationData.model.ts.bak
 
 # produced files
 config/
+
+# sass
+webgui/content/**/*.css
+webgui/content/**/*.css.map
+

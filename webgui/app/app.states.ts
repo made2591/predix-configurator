@@ -3,6 +3,7 @@ import { IgsConfigComponent }           from './igsConfig/igsConfig.component';
 import { PredixGlobalConfigComponent }  from "./predixGlobalConfig/predixGlobalConfig.component";
 import { PredixCloudConfigComponent }   from "./predixCloudConfig/predixCloudConfig.component";
 import { TagMappingSchemaComponent }    from "./tagMappingSchema/tagMappingSchema.component";
+import { SitesMachinesComponent }       from "./sitesMachines/sitesMachines.component";
 import { ResultComponent }              from './result/result.component';
 
 import { WorkflowService }              from "./workflow/workflow.service";
@@ -19,6 +20,8 @@ export const appStates = [
     // 4th State
     { name: 'tagMappingSchema', url: '/tagMappingSchema',  component: TagMappingSchemaComponent, onEnter: verifyWorkFlow },
     // 5th State
+    { name: 'sitesMachines', url: '/sitesMachines',  component: SitesMachinesComponent, onEnter: verifyWorkFlow },
+    // 6th State
     { name: 'result', url: '/result',  component: ResultComponent, onEnter: verifyWorkFlow }
 ];
 
