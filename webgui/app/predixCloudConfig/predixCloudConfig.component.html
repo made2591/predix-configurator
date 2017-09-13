@@ -10,7 +10,7 @@
             <p class="light" for="timeserieszoneid"><b>TIMESERIES_ZONE_ID</b>: This is the ZONE ID (cf env main app name) needed to define timeseries.</p>
             <input class="form-control input-md" #timeserieszoneid="ngModel" required id="timeserieszoneid" name="timeserieszoneid" type="text" placeholder="TIMESERIES_ZONE_ID" [(ngModel)]="predixCloudConfig.TIMESERIES_ZONE_ID">
         </div>
-        <p class="light-blue-text center" style="margin: 0 1%;">The following parameters are needed to communicate with Predix Cloud.</p>
+        <!--<p class="light-blue-text center" style="margin: 0 1%;">The following parameters are needed to communicate with Predix Cloud.</p>-->
         <div class='row'>
             <div class="input-field col s12">
                 <p class="light" for="urloauthtoken"><b>URL_OAUTH_TOKEN</b>: The oauth token url (UAA)</p>
@@ -24,8 +24,8 @@
                 <p class="light" for="appclientsecret"><b>APP_CLIENT_SECRET</b></p>
                 <input class="form-control input-md" #appclientsecret="ngModel" required id="appclientsecret" name="appclientsecret" type="text" placeholder="APP_CLIENT_SECRET" [(ngModel)]="predixCloudConfig.APP_CLIENT_SECRET">
             </div>
-        </div>
-        <div class="row">
+        <!--</div>-->
+        <!--<div class="row">-->
             <div class="input-field col s8">
                 <p class="light" for="proxyhost"><b>PROXY_HOST</b>: This is the host of proxy if your company is behind a firewall.</p>
                 <input class="form-control input-md" #proxyhost="ngModel" id="proxyhost" name="proxyhost" type="text" placeholder="PROXY_HOST" [(ngModel)]="predixCloudConfig.PROXY_HOST">

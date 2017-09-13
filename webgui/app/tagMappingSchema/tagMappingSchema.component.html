@@ -9,7 +9,7 @@
         <form [formGroup]="tagMappingSchemaWrapper" novalidate (ngSubmit)="save(tagMappingSchemaWrapper)">
             <div formArrayName="tagMappingSchemaForms">
                 <div *ngFor="let tagMappingSchemaForm of tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls; let formIndex=index">
-                    <div [formGroupName]="formIndex" class="row" style="background-color: #F1F1F1; border: none; border: 1px solid #c7c7c7; border-radius: 0;">
+                    <div [formGroupName]="formIndex" class="row card-content predix darken-2" style="padding: 40px;">
                         <div *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length > 1">
                             <div class="input-field col s5">
                                 <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="Tag Mapping Group Name" formControlName="mappingSchemaName">

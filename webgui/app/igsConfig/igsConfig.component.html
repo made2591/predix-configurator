@@ -11,7 +11,7 @@
                 <p class="light" for="serveruri"><b>SERVER_URI</b>: This is the only field needed by a Predix Machine to point an IGS instance and catch OPCUA data</p>
                 <input class="form-control input-md" #serveruri="ngModel" required id="serveruri" name="serveruri" type="text" placeholder="SERVER_URI" [(ngModel)]="igsConfig.SERVER_URI">
             </div>
-            <div class="input-field col s12">
+            <div class="input-field col s6">
                 <p class="light" for="appuri"><b>APP_URI</b>: This is the a field to specify App Uri</p>
                 <input class="form-control input-md" #appuri="ngModel" required id="appuri" name="appuri" type="text" placeholder="APP_URI" [(ngModel)]="igsConfig.APP_URI">
             </div>
@@ -25,6 +25,9 @@
             </div>
             <div class="row">
                 <div class="input-field col s12" style="text-align: center;">
+                    <button uiSref="homePage" class="btn btn-success btn-outline-rounded btn-info" (click)="save(igsConfigForm)">Welcome Page
+                        <i class="material-icons right">home</i>
+                    </button>
                     <button class="btn waves-effect waves-light red" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
                         <i class="material-icons right">delete</i>
                     </button>

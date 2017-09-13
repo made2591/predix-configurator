@@ -1,3 +1,4 @@
+import { HomePageComponent }            from './homePage/homePage.component';
 import { IgsConfigComponent }           from './igsConfig/igsConfig.component';
 import { PredixGlobalConfigComponent }  from "./predixGlobalConfig/predixGlobalConfig.component";
 import { PredixCloudConfigComponent }   from "./predixCloudConfig/predixCloudConfig.component";
@@ -7,6 +8,8 @@ import { ResultComponent }              from './result/result.component';
 import { WorkflowService }              from "./workflow/workflow.service";
 
 export const appStates = [
+    // Welcome State
+    { name: 'homePage', url: '/homePage',  component: HomePageComponent },
     // 1st State
     { name: 'igsConfig', url: '/igsConfig',  component: IgsConfigComponent },
     // 2nd State:

@@ -8,6 +8,7 @@ import { AppComponent }                             from './app.component';
 import { NavbarComponent }                          from './navbar/navbar.component';
 
 /* Feature Components */
+import { HomePageComponent }                        from './homePage/homePage.component';
 import { IgsConfigComponent }                       from './igsConfig/igsConfig.component';
 import { PredixGlobalConfigComponent }              from './predixGlobalConfig/predixGlobalConfig.component';
 import { PredixCloudConfigComponent }               from "./predixCloudConfig/predixCloudConfig.component";
@@ -47,6 +48,7 @@ import { WorkflowService }                          from './workflow/workflow.se
     declarations: [
                     AppComponent,
                     NavbarComponent,
+                    HomePageComponent,
                     IgsConfigComponent,
                     PredixGlobalConfigComponent,
                     PredixCloudConfigComponent,

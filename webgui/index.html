@@ -10,7 +10,7 @@
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="content/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="content/sass/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     
     <!-- IE required polyfills, in this exact order -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -21,34 +21,53 @@
         System.import('app')
         .catch(console.error.bind(console));
     </script>
+
+    <style type="text/css">
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+    </style>
+
   </head>
-  <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="images/predix_logo.svg" class="brand-logo">Predix</a>
+  <nav class="predix darken-1" role="navigation">
+      <div class="nav-wrapper container">
+          <a href="homePage"><img id="logo-container" src="content/images/predix-logo.svg" class="brand-logo" style="width: 17%; margin-top: 13px;"></a>
           <ul class="right hide-on-med-and-down">
-              <li><a href="step1.html">Start</a></li>
+              <li><a uiSref="homePage">Start</a></li>
               <li><a href="about.html">About</a></li>
           </ul>
 
           <ul id="nav-mobile" class="side-nav" style="transform: translateX(-100%);">
-              <li><a href="step1.html">Start</a></li>
+              <li><a uiSref="homePage">Start</a></li>
               <li><a href="about.html">About</a></li>
           </ul>
           <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
   </nav>
-  <body>
-    <multi-step-wizard-app>
-      <!-- Show simple splash screen-->
-      <div class="splash">
-          <div class="color-line"></div>
-              <div class="splash-title">
-                  <img src="content/images/loading-bars.svg" width="64" height="64" />
+  <body class="predix darken-3">
+
+      <main>
+        <multi-step-wizard-app class="white-text">
+          <!-- Show simple splash screen-->
+          <div class="splash">
+              <div class="color-line"></div>
+                  <div class="splash-title">
+                      <img src="content/images/loading-bars.svg" width="64" height="64" />
+                  </div>
               </div>
           </div>
-      </div>
-    </multi-step-wizard-app>
+        </multi-step-wizard-app>
+      </main>
 
-    <footer class="page-footer orange">
+    <footer class="page-footer predix darken-2">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -60,24 +79,24 @@
                 <div class="col l3 s12">
                     <h5 class="white-text">Settings</h5>
                     <ul>
-                        <li><a class="white-text" href="#!">Your Plant</a></li>
-                        <li><a class="white-text" href="#!">Our Plant</a></li>
-                        <li><a class="white-text" href="#!">Next Steps</a></li>
-                        <li><a class="white-text" href="#!">About</a></li>
+                        <li><a class="predix-text" href="#!">Your Plant</a></li>
+                        <li><a class="predix-text" href="#!">Our Plant</a></li>
+                        <li><a class="predix-text" href="#!">Next Steps</a></li>
+                        <li><a class="predix-text" href="#!">About</a></li>
                     </ul>
                 </div>
                 <div class="col l3 s12">
                     <h5 class="white-text">Connect</h5>
                     <ul>
-                        <li><a class="white-text" href="#!">AvioAero</a></li>
-                        <li><a class="white-text" href="#!">Github</a></li>
-                        <li><a class="white-text" href="#!">Slack</a></li>
-                        <li><a class="white-text" href="#!">Twitter</a></li>
+                        <li><a class="predix-text" href="#!">AvioAero</a></li>
+                        <li><a class="predix-text" href="#!">Github</a></li>
+                        <li><a class="predix-text" href="#!">Slack</a></li>
+                        <li><a class="predix-text" href="#!">Twitter</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
+        <div class="footer-copyright predix darken-1">
             <div class="container">
                 Made by <a class="orange-text text-lighten-3" href="http://made25.github.io">Matteo Madeddu</a>
             </div>
@@ -99,5 +118,4 @@
     <div class="hiddendiv common"></div><div class="drag-target" data-sidenav="nav-mobile" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
 
   </body>
-
 </html>
