@@ -83,7 +83,7 @@ export class TagMappingSchemaComponent implements OnInit {
             return;
     
         const tagMappingSchemaForms = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
-    
+        
         // for each tagMappingSchemaForm
         for(let i = 0; i < tagMappingSchemaForms.length; i++) {
 
@@ -115,9 +115,9 @@ export class TagMappingSchemaComponent implements OnInit {
             // create dictionary for tag couples
             this.tagMappingSchema[mappingSchemaName].MAPPING = {};
 
-            let mappingSchema = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
-            mappingSchema = mappingSchema[i];
-            mappingSchema = <FormArray>mappingSchema.controls['mappingSchemaDict'];
+            let tagMappingSchemaForms = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
+            let tagMappingSchemaForm = <FormGroup>tagMappingSchemaForms.controls[i];
+            let mappingSchema = <FormArray>tagMappingSchemaForm.controls['mappingSchemaDict'];
             
             // for each tagCouple
             for (let k = 0; k < mappingSchema.length; k++) {
