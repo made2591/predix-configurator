@@ -3,6 +3,6 @@ export const STEPS = {
     predixGlobalConfig: 'predixGlobalConfig',
     predixCloudConfig:  'predixCloudConfig',
     tagMappingSchema:   'tagMappingSchema',
-    sitesMachines:      'sitesMachines',
+    sitesGroups:        'sitesGroups',
     result:             'result'
-}
+};

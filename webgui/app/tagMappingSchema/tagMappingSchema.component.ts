@@ -79,8 +79,8 @@ export class TagMappingSchemaComponent implements OnInit {
     
     save(form: any) {
         
-        if (!form.valid)
-            return;
+        // if (!form.valid)
+        //     return;
     
         const tagMappingSchemaForms = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
         

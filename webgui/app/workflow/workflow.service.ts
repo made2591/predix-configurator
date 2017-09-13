@@ -9,7 +9,7 @@ export class WorkflowService {
         { step: STEPS.predixGlobalConfig, valid: false },
         { step: STEPS.predixCloudConfig, valid: false },
         { step: STEPS.tagMappingSchema, valid: false },
-        { step: STEPS.sitesMachines, valid: false },
+        { step: STEPS.sitesGroups, valid: false },
         { step: STEPS.result, valid: false }
     ];
     

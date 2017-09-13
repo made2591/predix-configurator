@@ -15,6 +15,7 @@ export class PredixConfigurationDataService {
     private isPredixGlobalConfigValid:  boolean = false;
     private isPredixCloudConfigValid:   boolean = false;
     private isTagMappingSchemaValid:    boolean = false;
+    private isSitesGroupsValid:         boolean = false;
 
     constructor(private workflowService: WorkflowService) {
         
@@ -140,6 +141,26 @@ export class PredixConfigurationDataService {
         
     }
     
+    // Return the SitesMachines data
+    getSitesGroups(): {} {
+        
+        return this.predixConfigurationData.SITES;
+        
+    }
+    
+    // Set the SitesMachines data
+    setSitesGroups(data: {}) {
+        
+        // Update the PredixGlobalConfig data only when the PredixGlobalConfig Form had been validated successfully
+        this.isSitesGroupsValid = true;
+        
+        this.predixConfigurationData.SITES = data;
+        
+        // Validate PredixGlobalConfig Step in Workflow
+        this.workflowService.validateStep(STEPS.sitesGroups);
+        
+    }
+    
     getPredixConfigurationData() {
         return this.predixConfigurationData;
     }
@@ -151,7 +172,7 @@ export class PredixConfigurationDataService {
 
         // Return the form data after all this.* members had been reset
         this.predixConfigurationData.clear();
-        this.isIgsConfigValid = this.isPredixGlobalConfigValid = this.isTagMappingSchemaValid = false;
+        this.isIgsConfigValid = this.isPredixGlobalConfigValid = this.isTagMappingSchemaValid = this.isSitesGroupsValid = false;
 
         return this.predixConfigurationData;
     }
@@ -159,7 +180,7 @@ export class PredixConfigurationDataService {
     isPredixConfigurationDataValid() {
 
         // Return true if all forms had been validated successfully; otherwise, return false
-        return this.isIgsConfigValid && this.isPredixGlobalConfigValid && this.isTagMappingSchemaValid;
+        return this.isIgsConfigValid && this.isPredixGlobalConfigValid && this.isTagMappingSchemaValid && this.isSitesGroupsValid;
 
     }
 
