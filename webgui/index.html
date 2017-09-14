@@ -11,7 +11,12 @@
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="content/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-    
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="content/js/materialize.js"></script>
+    <script src="content/js/lib.js"></script>
+
     <!-- IE required polyfills, in this exact order -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
     <script src="node_modules/zone.js/dist/zone.js"></script>
@@ -37,7 +42,7 @@
     </style>
 
   </head>
-  <nav class="predix darken-1" role="navigation">
+  <nav class="predix darken-1 z-depth-3" role="navigation">
       <div class="nav-wrapper container">
           <a href="homePage">
               <img id="logo-container" src="content/images/predix-logo.svg" class="brand-logo" style="width: 17%; margin-top: 14px;">
@@ -69,19 +74,17 @@
         </multi-step-wizard-app>
       </main>
 
-    <footer class="page-footer predix darken-2">
+    <footer class="page-footer predix darken-2 z-depth-3">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">Company Bio</h5>
-                    <p class="grey-text text-lighten-4">We are the AvioAero IT Team. We simply rock.</p>
-
+                    <p class="grey-text text-lighten-4">We are the AvioAero IT Team: we truly believe in OpenSource. OpenSource will never die.<br/> Made by <a class="orange-text text-lighten-3" href="http://made25.github.io">Matteo Madeddu</a>
+                    </p>
                 </div>
                 <div class="col l3 s12">
                     <h5 class="white-text">Settings</h5>
                     <ul>
-                        <li><a class="predix-text" href="#!">Your Plant</a></li>
-                        <li><a class="predix-text" href="#!">Our Plant</a></li>
                         <li><a class="predix-text" href="#!">Next Steps</a></li>
                         <li><a class="predix-text" href="#!">About</a></li>
                     </ul>
@@ -91,29 +94,25 @@
                     <ul>
                         <li><a class="predix-text" href="#!">AvioAero</a></li>
                         <li><a class="predix-text" href="#!">Github</a></li>
-                        <li><a class="predix-text" href="#!">Slack</a></li>
-                        <li><a class="predix-text" href="#!">Twitter</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-copyright predix darken-1">
-            <div class="container">
-                Made by <a class="orange-text text-lighten-3" href="http://made25.github.io">Matteo Madeddu</a>
+            <div class="container center-align">
+                <p>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007, Copyright (C) 2007 <a href="http://fsf.org/">Free Software Foundation, Inc.</a></p>
             </div>
         </div>
     </footer>
 
-
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="content/js/materialize.js"></script>
-    <script src="content/js/lib.js"></script>
     <script type="javascript">
-        $(function() {
-            // Remove splash screen after load
+
+        $( document ).ready(function() {
+
             $('.splash').css('display', 'none');
+
         });
+
     </script>
 
     <div class="hiddendiv common"></div><div class="drag-target" data-sidenav="nav-mobile" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>

@@ -13,6 +13,7 @@ export class SitesGroupsComponent implements OnInit {
     title = 'Step 5 - Tag Schema(s)';
     description = 'To setup your factory you need to create mapping between time series instance and tag of IGS instance.';
     sitesGroups: {};
+    tagMappingSchemas: [];
     form: any;
     sitesGroupsWrapper: FormGroup;
     
@@ -20,7 +21,15 @@ export class SitesGroupsComponent implements OnInit {
     }
     
     ngOnInit() {
-        this.sitesGroups = this.predixConfigurationDataService.getTagMappingSchema();
+        this.sitesGroups = this.predixConfigurationDataService.getSitesGroups();
+        console.log(this.predixConfigurationDataService.getTagMappingSchema());
+        this.tagMappingSchemas = [];
+        for (let key in this.predixConfigurationDataService.getTagMappingSchema()) {
+            // let key = entry[0];
+            // let value = myDictionary[key];
+            // Use `key` and `value`
+            this.tagMappingSchemas.push(key);
+        }
         this.sitesGroupsWrapper = this.formBuilder.group({
             sitesGroupsForms: this.formBuilder.array([
                 this.initSiteGroupsForm(),
@@ -55,8 +64,8 @@ export class SitesGroupsComponent implements OnInit {
         return this.formBuilder.group({
             groupName: [''],
             globalTagMappingSchema: [''],
-            globalEnableSetup: [''],
-            globalPrefix: [''],
+            globalEnableSetup: new FormControl(true),
+            globalPrefix: ['']
         })
     }
     

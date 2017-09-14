@@ -1,5 +1,5 @@
 <form #tagMappingSchemaForms="ngForm" class="editForm" novalidate>
-    <div class="col s12 center">
+    <div class="col s12 center" style="margin-top: 20px;">
         <h5 class="center">{{title}}</h5>
         <p class="light center">{{description}}</p>
         <br>
@@ -9,7 +9,7 @@
         <form [formGroup]="tagMappingSchemaWrapper" novalidate (ngSubmit)="save(tagMappingSchemaWrapper)">
             <div formArrayName="tagMappingSchemaForms">
                 <div *ngFor="let tagMappingSchemaForm of tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls; let formIndex=index">
-                    <div [formGroupName]="formIndex" class="row card-content predix darken-2" style="padding: 40px;">
+                    <div [formGroupName]="formIndex" class="row z-depth-3 predix darken-4" style="padding: 25px 50px;">
                         <div *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length > 1">
                             <div class="input-field col s5">
                                 <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="Tag Mapping Group Name" formControlName="mappingSchemaName">
@@ -84,16 +84,16 @@
 
     <div class="row">
         <div class="input-field col s12" style="text-align: center;">
-            <button uiSref="predixCloudConfig" class="btn btn-outline-rounded btn-default" (click)="save(tagMappingSchemaForms)">Previous Step
+            <button uiSref="predixCloudConfig" class="btn btn-outline-rounded predix darken-2" (click)="save(tagMappingSchemaForms)">Previous Step
                 <i class="material-icons right">navigate_before</i>
             </button>
-            <button class="btn waves-effect waves-light red" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
+            <button class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
                 <i class="material-icons right">delete</i>
             </button>
-            <button class="btn waves-effect waves-light green" style="margin: 5px auto;" name="load" id="load">Load Conf
+            <button class="btn waves-effect waves-light predix lighten-2" style="margin: 5px auto;" name="load" id="load">Load Conf
                 <i class="material-icons right">file_upload</i>
             </button>
-            <button uiSref="sitesGroups" class="btn btn-success btn-outline-rounded btn-info" [disabled]="!tagMappingSchemaForms.valid" (click)="save(tagMappingSchemaForms)">Next Step
+            <button uiSref="sitesGroups" class="btn btn-outline-rounded predix darken-2" [disabled]="!tagMappingSchemaForms.valid" (click)="save(tagMappingSchemaForms)">Next Step
                 <i class="material-icons right">navigate_next</i>
             </button>
         </div>

@@ -1,12 +1,12 @@
 <form #predixGlobalConfigForm="ngForm" class="editForm" novalidate>
-    <div class="col s12 center">
+    <div class="col s12 center" style="margin-top: 20px;">
         <h5 class="center">{{title}}</h5>
         <p class="light center">{{description}}</p>
         <br>
     </div>
 
     <div class="tab-pane fade in active">
-        <div class='row'>
+        <div class='row z-depth-3 predix darken-4' style="padding: 25px 50px;">
             <div class="input-field col s6">
                 <p class="light" for="globalconfigsuffix"><b>GLOBAL_CONFIG_SUFFIX</b>: Default ".config"</p>
                 <input class="form-control input-md" #globalconfigsuffix="ngModel" required id="globalconfigsuffix" name="globalconfigsuffix" type="text" placeholder="GLOBAL_CONFIG_SUFFIX" [(ngModel)]="predixGlobalConfig.GLOBAL_CONFIG_SUFFIX">
@@ -31,22 +31,22 @@
                 <p class="light" for="predixwebsocketriver"><b>PREDIX_WEBSOCKER_RIVER</b>: Default "com.ge.dspmicro.machineadapter.opcua-0"</p>
                 <input class="form-control input-md" #predixwebsocketriver="ngModel" required id="predixwebsocketriver" name="predixwebsocketriver" type="text" placeholder="PREDIX_WEBSOCKER_RIVER" [(ngModel)]="predixGlobalConfig.PREDIX_WEBSOCKER_RIVER">
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12">
                 <p class="light" for="proxyconfigurator"><b>PROXY_CONFIGURATION</b>: Default "com.ge.dspmicro.machineadapter.opcua-0"</p>
                 <input class="form-control input-md" #proxyconfigurator="ngModel" required id="proxyconfigurator" name="proxyconfigurator" type="text" placeholder="PROXY_CONFIGURATION" [(ngModel)]="predixGlobalConfig.PROXY_CONFIGURATION">
             </div>
             <div class="row">
                 <div class="input-field col s12" style="text-align: center;">
-                    <button uiSref="igsConfig" class="btn btn-outline-rounded btn-default" (click)="save(predixGlobalConfigForm)">Previous Step
+                    <button uiSref="igsConfig"         class="btn btn-outline-rounded predix darken-2" (click)="save(predixGlobalConfigForm)">Previous Step
                         <i class="material-icons right">navigate_before</i>
                     </button>
-                    <button class="btn waves-effect waves-light red" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
+                    <button class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
                         <i class="material-icons right">delete</i>
                     </button>
-                    <button class="btn waves-effect waves-light green" style="margin: 5px auto;" name="load" id="load" (click)="predixGlobalConfig.setDefault();">Load Conf
+                    <button class="btn waves-effect waves-light predix lighten-2" style="margin: 5px auto;" name="load" id="load" (click)="predixGlobalConfig.setDefault();">Load Conf
                         <i class="material-icons right">file_upload</i>
                     </button>
-                    <button uiSref="predixCloudConfig" class="btn btn-success btn-outline-rounded btn-info" [disabled]="!predixGlobalConfigForm.valid" (click)="save(predixGlobalConfigForm)">Next Step
+                    <button uiSref="predixCloudConfig" class="btn btn-outline-rounded predix darken-2" [disabled]="!predixGlobalConfigForm.valid" (click)="save(predixGlobalConfigForm)">Next Step
                         <i class="material-icons right">navigate_next</i>
                     </button>
                 </div>

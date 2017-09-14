@@ -1,5 +1,5 @@
 <form #sitesGroupsForms="ngForm" class="editForm" novalidate>
-    <div class="col s12 center">
+    <div class="col s12 center" style="margin-top: 20px;">
         <h5 class="center">{{title}}</h5>
         <p class="light center">{{description}}</p>
         <br>
@@ -9,13 +9,13 @@
         <form [formGroup]="sitesGroupsWrapper" novalidate (ngSubmit)="save(sitesGroupsWrapper)">
             <div formArrayName="sitesGroupsForms">
                 <div *ngFor="let sitesGroupsForm of sitesGroupsWrapper.controls.sitesGroupsForms.controls; let formIndex=index">
-                    <div [formGroupName]="formIndex" class="row card-content predix darken-2" style="padding: 40px;">
+                    <div [formGroupName]="formIndex" class="row z-depth-3 predix darken-2" style="padding: 25px 50px;">
                         <div *ngIf="sitesGroupsWrapper.controls.sitesGroupsForms.controls.length > 1">
                             <div class="input-field col s10">
-                                <input class="form-control input-md" name="siteName" type="text" placeholder="Site Name" formControlName="siteName">
+                                <input class="form-control input-md" name="siteName" type="text" placeholder="SITE NAME: Insert here the name of the Site of your Factory" formControlName="siteName">
                             </div>
                             <div class="input-field col s1 center-align">
-                                <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addSiteGroupsForm" (click)="addSiteGroupsForm();"><i class="material-icons">add</i></a>
+                                <a class="btn-floating btn-small waves-effect waves-light light-blue material-tooltip" name="addSiteGroupsForm" (click)="addSiteGroupsForm();"><i class="material-icons">add</i></a>
                             </div>
                             <div class="input-field col s1 center-align">
                                 <a class="btn-floating btn-small waves-effect waves-light red" name="removeSiteGroupsForm" (click)="removeSiteGroupsForm(formIndex);"><i class="material-icons">delete</i></a>
@@ -23,7 +23,7 @@
                         </div>
                         <div *ngIf="sitesGroupsWrapper.controls.sitesGroupsForms.controls.length <= 1">
                             <div class="input-field col s11">
-                                <input class="form-control input-md" name="siteName" type="text" placeholder="Site Name" formControlName="siteName">
+                                <input class="form-control input-md" name="siteName" type="text" placeholder="SITE NAME: Insert here the name of the Site of your Factory" formControlName="siteName">
                             </div>
                             <div class="input-field col s1 center-align">
                                 <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addSiteGroupsForm" (click)="addSiteGroupsForm();"><i class="material-icons">add</i></a>
@@ -31,47 +31,33 @@
                         </div>
                         <div formArrayName="groups">
                             <div *ngFor="let siteGroup of sitesGroupsForm.controls.groups.controls; let siteGroupIndex=index">
-                                <div [formGroupName]="siteGroupIndex">
-                                    <div *ngIf="sitesGroupsForm.controls.groups.controls.length > 1">
-                                        <div class="input-field col s5 offset-s1">
-                                            <input class="form-control input-md" name="groupName" type="text" placeholder="groupName" formControlName="groupName">
-                                        </div>
-                                        <div class="input-field col s5">
-                                            <input class="form-control input-md" name="globalTagMappingSchema" type="text" placeholder="globalTagMappingSchema" formControlName="globalTagMappingSchema">
-                                        </div>
-                                        <div class="input-field col s1 center-align">
-                                            <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addGroup" (click)="addGroup(formIndex);"><i class="material-icons">add</i></a>
-                                        </div>
-                                        <div class="input-field col s5 offset-1">
-                                            <input class="form-control input-md" name="globalPrefix" type="text" placeholder="globalPrefix" formControlName="globalPrefix">
-                                        </div>
-                                        <div class="input-field col s5">
-                                            <input type="checkbox" [id]="siteGroupIndex" formControlName="globalEnableSetup"
-                                                   (change)="formControlName"/>
-                                            <label [for]="siteGroupIndex">Enable Group</label>
-                                        </div>
-                                        <div class="input-field col s1 center-align">
-                                            <a class="btn-floating btn-small waves-effect waves-light red" name="removeGroup" (click)="removeGroup(formIndex, siteGroupIndex);"><i class="material-icons">delete</i></a>
-                                        </div>
+                                <div [formGroupName]="siteGroupIndex" class="row" style="padding-right: 11px;">
+                                    <div class="input-field col s5 offset-s1">
+                                        <input class="form-control input-md" name="groupName" type="text" placeholder="GROUP NAME: Insert here the name of the group of machines" formControlName="groupName">
                                     </div>
-                                    <div *ngIf="sitesGroupsForm.controls.groups.controls.length <= 1">
-                                        <div class="input-field col s5 offset-s1">
-                                            <input class="form-control input-md" name="groupName" type="text" placeholder="groupName" formControlName="groupName">
-                                        </div>
-                                        <div class="input-field col s5">
-                                            <input class="form-control input-md" name="globalTagMappingSchema" type="text" placeholder="globalTagMappingSchema" formControlName="globalTagMappingSchema">
-                                        </div>
-                                        <div class="input-field col s1 center-align">
-                                            <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addGroup" (click)="addGroup(formIndex);"><i class="material-icons">add</i></a>
-                                        </div>
-                                        <div class="input-field col s5 offset-s1">
-                                            <input class="form-control input-md" name="globalPrefix" type="text" placeholder="globalPrefix" formControlName="globalPrefix">
-                                        </div>
-                                        <div class="input-field col s5">
-                                            <input type="checkbox" [id]="siteGroupIndex" formControlName="globalEnableSetup"
-                                                   (change)="formControlName"/>
-                                            <label [for]="siteGroupIndex">Enable Group</label>
-                                        </div>
+                                    <div class="input-field col s5">
+                                        <select id="schema{{formIndex+siteGroupIndex}}">
+                                            <option value="" disabled selected>Choose your option</option>
+                                            <option *ngFor="let tagMappingSchema of tagMappingSchemas;" value="{{tagMappingSchema}}">{{tagMappingSchema}}</option>
+                                        </select>
+                                        <label for="schema{{formIndex+siteGroupIndex}}">Materialize Select</label>
+                                    </div>
+                                    <!--<div class="input-field col s5">-->
+                                        <!--<input class="form-control input-md" name="globalTagMappingSchema" type="text" placeholder="TAG Mapping Schema: Insert here the name of the group of machines" formControlName="globalTagMappingSchema">-->
+                                    <!--</div>-->
+                                    <div class="input-field col s1 center-align">
+                                        <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addGroup" (click)="addGroup(formIndex);"><i class="material-icons">add</i></a>
+                                    </div>
+                                    <div class="input-field col s5 offset-s1">
+                                        <input class="form-control input-md" name="globalPrefix" type="text" placeholder="globalPrefix" formControlName="globalPrefix">
+                                    </div>
+                                    <div class="col s5">
+                                        <p>
+                                            <input type="checkbox" id="checkbox{{formIndex+siteGroupIndex}}" /><label for="checkbox{{formIndex+siteGroupIndex}}">Enable Group Setup</label>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="sitesGroupsForm.controls.groups.controls.length > 1" class="input-field col s1 center-align">
+                                        <a class="btn-floating btn-small waves-effect waves-light red" name="removeGroup" (click)="removeGroup(formIndex, siteGroupIndex);"><i class="material-icons">delete</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -94,19 +80,25 @@
 
     <div class="row">
         <div class="input-field col s12" style="text-align: center;">
-            <button uiSref="tagMappingSchema" class="btn btn-outline-rounded btn-default" (click)="save(sitesGroupsForms)">Previous Step
+            <button uiSref="tagMappingSchema" class="btn btn-outline-rounded predix darken-2" (click)="save(sitesGroupsForms)">Previous Step
                 <i class="material-icons right">navigate_before</i>
             </button>
-            <button class="btn waves-effect waves-light red" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
+            <button class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
                 <i class="material-icons right">delete</i>
             </button>
-            <button class="btn waves-effect waves-light green" style="margin: 5px auto;" name="load" id="load">Load Conf
+            <button class="btn waves-effect waves-light predix lighten-2" style="margin: 5px auto;" name="load" id="load">Load Conf
                 <i class="material-icons right">file_upload</i>
             </button>
-            <button uiSref="result" class="btn btn-success btn-outline-rounded btn-info" [disabled]="!sitesGroupsForms.valid" (click)="save(sitesGroupsForms)">Next Step
+            <button uiSref="result" class="btn btn-outline-rounded predix darken-2" [disabled]="!sitesGroupsForms.valid" (click)="save(sitesGroupsForms)">Next Step
                 <i class="material-icons right">navigate_next</i>
             </button>
         </div>
     </div>
 
 </form>
+
+<script type="javascript">
+
+    $('select').material_select();
+
+</script>
