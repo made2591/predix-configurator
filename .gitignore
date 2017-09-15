@@ -105,22 +105,22 @@ ENV/
 
 # node and compiled typescript
 webgui/node_modules
-webgui/app/**/*.js
-webgui/app/**/*.js.map
+webgui/src/app/**/*.js
+webgui/src/app/**/*.js.map
 
 # personal
 schema/my-factory.json
 
 # todo yet
-webgui/app/navbar
+webgui/src/app/navbar
 
 # personal
-webgui/app/data/predixConfigurationData.model.ts.bak
+webgui/src/app/data/predixConfigurationData.model.ts.bak
 
 # produced files
 config/
 
 # sass
-webgui/content/**/*.css
-webgui/content/**/*.css.map
+webgui/src/assets/**/*.css
+webgui/src/assets/**/*.css.map
 
