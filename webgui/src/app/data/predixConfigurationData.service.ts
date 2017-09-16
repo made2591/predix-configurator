@@ -142,14 +142,14 @@ export class PredixConfigurationDataService {
     }
     
     // Return the SitesMachines data
-    getSitesGroups(): Map<String, MachineGroup> {
+    getSitesGroups(): {} {
         
         return this.predixConfigurationData.SITES;
         
     }
     
     // Set the SitesMachines data
-    setSitesGroups(data: Map<String, MachineGroup>) {
+    setSitesGroups(data: {}) {
         
         // Update the PredixGlobalConfig data only when the PredixGlobalConfig Form had been validated successfully
         this.isSitesGroupsValid = true;

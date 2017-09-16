@@ -5,8 +5,11 @@ export class PredixConfigurationData {
     PREDIX_GLOBAL_CONFIG: PredixGlobalConfig    = new PredixGlobalConfig();
     PREDIX_CLOUD_CONFIG: PredixCloudConfig      = new PredixCloudConfig();
     PREDIX_MACHINE_CONFIG: PredixMachineConfig  = new PredixMachineConfig();
-    TAG_MAPPING_SCHEMA: { [TAG_MAPPING_SCHEMA_NAME: string] : MappingSchema; }  = {};
-    SITES: Map<String, MachineGroup> = new Map();
+    TAG_MAPPING_SCHEMA:
+        { [TAG_MAPPING_SCHEMA_NAME: string] :
+            MappingSchema; }                    = {};
+    SITES: { [SITE_NAME: string] :
+        MachineGroup; }                         = {};
     
     setDefault() {
 
@@ -21,7 +24,7 @@ export class PredixConfigurationData {
         this.PREDIX_GLOBAL_CONFIG.setDefault();
         this.PREDIX_CLOUD_CONFIG.setDefault();
         this.PREDIX_MACHINE_CONFIG.setDefault();
-        this.SITES = new Map();
+        this.SITES = {};
         this.TAG_MAPPING_SCHEMA = {};
 
     }
@@ -32,7 +35,7 @@ export class PredixConfigurationData {
         this.PREDIX_GLOBAL_CONFIG   = new PredixGlobalConfig();
         this.PREDIX_CLOUD_CONFIG    = new PredixCloudConfig();
         this.PREDIX_MACHINE_CONFIG  = new PredixMachineConfig();
-        this.SITES                  = new Map();
+        this.SITES                  = {};
         this.TAG_MAPPING_SCHEMA     = {};
     }
     
@@ -192,6 +195,7 @@ export class Machine {
 }
 
 export class MachineGroup {
+    
     GLOBAL_TAG_MAPPING_SCHEMA: string;
     GLOBAL_ENABLE_SETUP: boolean;
     GLOBAL_PREFIX: string;
@@ -204,20 +208,6 @@ export class MachineGroup {
         this.GLOBAL_ENABLE_SETUP = false;
         this.GLOBAL_PREFIX = "";
         this.MACHINES = {};
-    }
-    
-}
-
-export class Site {
-
-    MACHINE_GROUPS: { [MACHINE_GROUP_NAME: string] : MachineGroup; };
-    
-    setDefault() {
-        this.MACHINE_GROUPS = {};
-    }
-    
-    clear() {
-        this.MACHINE_GROUPS = {};
     }
     
 }

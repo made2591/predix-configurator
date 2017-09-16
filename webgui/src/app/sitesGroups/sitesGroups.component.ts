@@ -13,9 +13,9 @@ import { PredixConfigurationDataService }                               from '..
 
 export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterViewChecked {
     
-    title = 'Step 5 - Tag Schema(s)';
-    description = 'To setup your factory you need to create mapping between time series instance and tag of IGS instance.';
-    sitesGroups: Map<String, MachineGroup>;
+    title = 'Step 6 - Sites & Groups';
+    description = 'To setup your factory you need to define your Sites and Group of machines inside.';
+    sitesGroups: {};
     tagMappingSchemas: Array<String>;
     form: any;
     sitesGroupsWrapper: FormGroup;
@@ -100,84 +100,105 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
         // if (!form.valid)
         //     return;
         
-        // const sitesGroupsForms = <FormArray>this.sitesGroupsWrapper.controls['sitesGroupsForms'];
-        //
-        // // for each tagMappingSchemaForm
-        // for(let i = 0; i < sitesGroupsForms.length; i++) {
-        //
-        //     // get mappgingSchemaName
-        //     let siteName =
-        //         (<FormArray>
-        //             (<FormGroup>this.sitesGroupsWrapper.controls['sitesGroupsForms'])
-			// 			.controls[i]).get('siteName').value;
-        //
-        //     // if the siteName is not null in any sense
-        //     if (siteName !== null && siteName.length > 0) {
-        //         // handle double names to
-        //         if (siteName in this.sitesGroups) {
-        //             siteName = siteName + (i.toString());
-        //         }
-        //     }
-        //     // create automatic name
-        //     else {
-        //         siteName = "SITE_NAME_"+(i.toString());
-        //     }
-        //
-        //     // create MappingSchema Object
-        //     this.sitesGroups[siteName] = new MappingSchema();
-        //     // create Key in TAG_MAPPING_SCHEMA var
-        //     this.sitesGroups[siteName].CHANNEL_PREFIX =
-        //         (<FormArray>
-        //             (<FormGroup>this.sitesGroupsWrapper.controls['sitesGroupsForms'])
-			// 			.controls[i]).get('channelPrefix').value;
-        //     // create dictionary for tag couples
-        //     this.sitesGroups[siteName].MAPPING = {};
-        //
-        //     let sitesGroupsForms = <FormArray>this.sitesGroupsWrapper.controls['sitesGroupsForms'];
-        //     let tagMappingSchemaForm = <FormGroup>sitesGroupsForms.controls[i];
-        //     let mappingSchema = <FormArray>tagMappingSchemaForm.controls['groups'];
-        //
-        //     // for each tagCouple
-        //     for (let k = 0; k < mappingSchema.length; k++) {
-        //
-        //         // get Head
-        //         let tagFrom = (<FormGroup>(
-        //             <FormArray>(
-        //                 <FormArray>(
-        //                     <FormGroup>
-        //                         this.sitesGroupsWrapper.controls['sitesGroupsForms']
-        //                 ).controls[i]
-        //             ).controls['groups']
-        //         ).controls[k].get('tagFrom')).value;
-        //
-        //         // if the tagFrom is not null in any sense
-        //         if (tagFrom !== null && tagFrom.length > 0) {
-        //             // handle double names to
-        //             if ((<MappingSchema>this.sitesGroups[siteName]).getElementWithKey(tagFrom) != null) {
-        //                 tagFrom = tagFrom + (k.toString());
-        //             }
-        //         }
-        //         // create automatic name for the tag
-        //         else {
-        //             tagFrom = "TAG_FROM"+(k.toString());
-        //         }
-        //
-        //         this.sitesGroups[siteName].MAPPING[tagFrom] = <FormGroup>(
-        //             <FormArray>(
-        //                 <FormArray>(
-        //                     <FormGroup>
-        //                         this.sitesGroupsWrapper.controls['sitesGroupsForms']
-        //                 ).controls[i]
-        //             ).controls['groups']
-        //         ).controls[k].get('tagTo').value;
-        //
-        //     }
-        //
-        // }
-        //
-        // console.log(this.sitesGroups);
+        const sitesGroupsForms = <FormArray>this.sitesGroupsWrapper.controls['sitesGroupsForms'];
+
+        // for each sitesGroupsForms
+        for(let i = 0; i < sitesGroupsForms.length; i++) {
+
+            // get siteName
+            let siteName =
+                (<FormArray>
+                    (<FormGroup>this.sitesGroupsWrapper.controls['sitesGroupsForms'])
+						.controls[i]).get('siteName').value;
+
+            // if the siteName is not null in any sense
+            if (siteName !== null && siteName.length > 0) {
+                // handle double names to
+                if (siteName in this.sitesGroups) {
+                    siteName = siteName + (i.toString());
+                }
+            }
+            // create automatic name
+            else {
+                siteName = "SITE_NAME_"+(i.toString());
+            }
+
+            // create Site Object
+            this.sitesGroups[siteName] = {};
+
+            let sitesGroupsForms = <FormArray>this.sitesGroupsWrapper.controls['sitesGroupsForms'];
+            let machineGroupForm = <FormGroup>sitesGroupsForms.controls[i];
+            let machineGroups = <FormArray>machineGroupForm.controls['groups'];
+
+            // for each machineGroup
+            for (let k = 0; k < machineGroups.length; k++) {
+
+                // get groupName
+                let groupName = (<FormGroup>(
+                    <FormArray>(
+                        <FormArray>(
+                            <FormGroup>
+                                this.sitesGroupsWrapper.controls['sitesGroupsForms']
+                        ).controls[i]
+                    ).controls['groups']
+                ).controls[k].get('groupName')).value;
+
+                // if the groupName is not null in any sense
+                if (groupName !== null && groupName.length > 0) {
+                    // handle double names to
+                    if (groupName in this.sitesGroups[siteName] != null) {
+                        groupName = groupName + (k.toString());
+                    }
+                }
+                // create automatic name for the groupName
+                else {
+                    groupName = "GROUP_NAME_"+(k.toString());
+                }
+    
+                // create MachineGroup Object
+                let newMachineGroup = new MachineGroup();
+
+                // create dictionary for machine groups
+                let newGlobalTagMappingSchema = (<FormGroup>(
+                    <FormArray>(
+                        <FormArray>(
+                            <FormGroup>
+                                this.sitesGroupsWrapper.controls['sitesGroupsForms']
+                        ).controls[i]
+                    ).controls['groups']
+                ).controls[k].get('globalTagMappingSchema')).value;
+    
+                let newGlobalEnableSetup = (<FormGroup>(
+                    <FormArray>(
+                        <FormArray>(
+                            <FormGroup>
+                                this.sitesGroupsWrapper.controls['sitesGroupsForms']
+                        ).controls[i]
+                    ).controls['groups']
+                ).controls[k].get('globalEnableSetup')).value;
+    
+                let newGlobalPrefix = (<FormGroup>(
+                    <FormArray>(
+                        <FormArray>(
+                            <FormGroup>
+                                this.sitesGroupsWrapper.controls['sitesGroupsForms']
+                        ).controls[i]
+                    ).controls['groups']
+                ).controls[k].get('globalPrefix')).value;
+    
+                newMachineGroup.GLOBAL_TAG_MAPPING_SCHEMA   = newGlobalTagMappingSchema;
+                newMachineGroup.GLOBAL_ENABLE_SETUP         = newGlobalEnableSetup;
+                newMachineGroup.GLOBAL_PREFIX               = newGlobalPrefix;
+                
+                this.sitesGroups[siteName][groupName] = newMachineGroup;
+                 
+            }
+
+        }
+
+        console.log(this.sitesGroups);
         
-        this.predixConfigurationDataService.setTagMappingSchema(this.sitesGroups);
+        this.predixConfigurationDataService.setSitesGroups(this.sitesGroups);
         
     }
     
