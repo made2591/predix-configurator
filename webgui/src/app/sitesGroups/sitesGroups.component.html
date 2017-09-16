@@ -50,11 +50,12 @@
                                         </div>
                                         <div class="input-field col s5">
                                             <md-select id="schema{{formIndex+siteGroupIndex}}"
+                                                       formControlName="globalTagMappingSchema"
                                                        style="color: white; !important; width: 100%;">
-                                                <md-option value="" disabled selected="">Choose your option</md-option>
+                                                <md-option value="" disabled>Choose your option</md-option>
                                                 <md-option *ngFor="let tagMappingSchema of tagMappingSchemas;"
-                                                           [value]="tagMappingSchema">{{tagMappingSchema}}
-                                                </md-option>
+                                                            [value]="tagMappingSchema"
+                                                    >{{tagMappingSchema}}</md-option>
                                             </md-select>
                                             <!--<label for="schema{{formIndex+siteGroupIndex}}">Materialize Select</label>-->
                                         </div>

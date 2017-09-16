@@ -38,6 +38,9 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
                 this.initSiteGroupsForm(),
             ])
         });
+        if(Object.keys(this.sitesGroups).length > 0) {
+            this.load();
+        }
         console.log('SitesGroupsComponent feature loaded!');
     }
     
@@ -48,9 +51,13 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
     //     console.log("ora");
     // }
     
-    initSiteGroupsForm() {
+    initSiteGroupsForm(sn? : string) {
+        
+        let snr = [''];
+        if(sn) { snr = [sn]; }
+
         return this.formBuilder.group({
-            siteName: [''],
+            siteName: snr,
             groups: this.formBuilder.array([
                 this.initGroupForm()
             ])
@@ -70,12 +77,22 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
         control.removeAt(i);
     }
     
-    initGroupForm() {
+    initGroupForm(gn? : string, gtms?: string, gp?: string, ges?: boolean) {
+    
+        let gnr   = [''];
+        let gtmsr = [''];
+        let gpr   = [''];
+        let gesr  = new FormControl(true);
+        if(gn)   { gnr = [gn]; }
+        if(gtms) { gtmsr = [gtms]; }
+        if(gp)   { gpr = [gp]; }
+        if(ges)  { gesr = new FormControl(ges); }
+
         return this.formBuilder.group({
-            groupName: [''],
-            globalTagMappingSchema: [''],
-            globalEnableSetup: new FormControl(true),
-            globalPrefix: ['']
+            groupName: gnr,
+            globalTagMappingSchema: gtmsr,
+            globalPrefix: gpr,
+            globalEnableSetup: gesr
         })
     }
     
@@ -95,10 +112,56 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
         control.removeAt(ti);
     }
     
+    load() {
+        
+        // create new forms array
+        let sitesGroupsForms = this.formBuilder.array([]);
+        
+        // for each schema in tagMappingSchema
+        for(let nameSitesGroups in this.sitesGroups) {
+            
+            // create a new site group form
+            let siteGroupsForm = this.initSiteGroupsForm(
+                nameSitesGroups);
+            
+            // create a new groups dict
+            let groups = this.formBuilder.array([]);
+            
+            // for each group in groups dict
+            for(let groupName in this.sitesGroups[nameSitesGroups]) {
+                
+                // create a group
+                let group = this.initGroupForm(
+                    groupName,
+                    this.sitesGroups[nameSitesGroups][groupName]['GLOBAL_TAG_MAPPING_SCHEMA'],
+                    this.sitesGroups[nameSitesGroups][groupName]['GLOBAL_PREFIX'],
+                    this.sitesGroups[nameSitesGroups][groupName]['GLOBAL_ENABLE_SETUP']
+                );
+                
+                // add group to dict
+                groups.push(group);
+                
+            }
+            
+            // add dict to specific tag mapping schema form
+            siteGroupsForm.controls['groups'] = groups;
+            
+            // add entire wrapper to forms
+            sitesGroupsForms.push(siteGroupsForm);
+            
+        }
+        
+        // setup up external wrapper
+        this.sitesGroupsWrapper.controls['sitesGroupsForms'] = sitesGroupsForms;
+        
+    }
+    
     save(form: any) {
         
         // if (!form.valid)
         //     return;
+        
+        this.sitesGroups = {};
         
         const sitesGroupsForms = <FormArray>this.sitesGroupsWrapper.controls['sitesGroupsForms'];
 
