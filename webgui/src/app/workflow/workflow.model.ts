@@ -4,5 +4,6 @@ export const STEPS = {
     predixCloudConfig:  'predixCloudConfig',
     tagMappingSchema:   'tagMappingSchema',
     sitesGroups:        'sitesGroups',
-    result:             'result'
+    groupsMachines:     'groupsMachines',
+    finalResult:        'finalResult'
 };

@@ -8,7 +8,7 @@ import { PredixConfigurationDataService }            from './data/predixConfigur
 })
 
 export class AppComponent implements OnInit {
-    title = 'Multi-Step Wizard';
+    title = 'Predix Configurator Tool';
     @Input() predixConfigurationData;
     
     constructor(private predixConfigurationDataService: PredixConfigurationDataService) {

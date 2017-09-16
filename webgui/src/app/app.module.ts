@@ -17,6 +17,7 @@ import { PredixGlobalConfigComponent }              from './predixGlobalConfig/p
 import { PredixCloudConfigComponent }               from "./predixCloudConfig/predixCloudConfig.component";
 import { TagMappingSchemaComponent }                from "./tagMappingSchema/tagMappingSchema.component";
 import { SitesGroupsComponent }                     from "./sitesGroups/sitesGroups.component";
+import { GroupsMachinesComponent }                  from "./groupsMachines/groupsMachines.component";
 import { ResultComponent }                          from './result/result.component';
 
 /* App Router */
@@ -57,6 +58,7 @@ import { WorkflowService }                          from './workflow/workflow.se
                     PredixCloudConfigComponent,
                     TagMappingSchemaComponent,
                     SitesGroupsComponent,
+                    GroupsMachinesComponent,
                     ResultComponent,
                   ],
     

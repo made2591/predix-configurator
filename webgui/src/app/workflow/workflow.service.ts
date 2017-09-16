@@ -10,7 +10,8 @@ export class WorkflowService {
         { step: STEPS.predixCloudConfig, valid: false },
         { step: STEPS.tagMappingSchema, valid: false },
         { step: STEPS.sitesGroups, valid: false },
-        { step: STEPS.result, valid: false }
+        { step: STEPS.groupsMachines, valid: false },
+        { step: STEPS.finalResult, valid: false }
     ];
     
     validateStep(step: string) {

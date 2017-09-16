@@ -13,7 +13,7 @@ import { PredixConfigurationDataService }                               from '..
 
 export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterViewChecked {
     
-    title = 'Step 6 - Sites & Groups';
+    title = 'Step 5 - Sites & Groups';
     description = 'To setup your factory you need to define your Sites and Group of machines inside.';
     sitesGroups: {};
     tagMappingSchemas: Array<String>;

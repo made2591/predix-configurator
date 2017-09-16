@@ -141,14 +141,14 @@ export class PredixConfigurationDataService {
         
     }
     
-    // Return the SitesMachines data
+    // Return the SitesGroups data
     getSitesGroups(): {} {
         
         return this.predixConfigurationData.SITES;
         
     }
     
-    // Set the SitesMachines data
+    // Set the SitesGroups data
     setSitesGroups(data: {}) {
         
         // Update the PredixGlobalConfig data only when the PredixGlobalConfig Form had been validated successfully

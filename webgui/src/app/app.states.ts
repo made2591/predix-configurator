@@ -4,6 +4,7 @@ import { PredixGlobalConfigComponent }  from "./predixGlobalConfig/predixGlobalC
 import { PredixCloudConfigComponent }   from "./predixCloudConfig/predixCloudConfig.component";
 import { TagMappingSchemaComponent }    from "./tagMappingSchema/tagMappingSchema.component";
 import { SitesGroupsComponent }         from "./sitesGroups/sitesGroups.component";
+import { GroupsMachinesComponent }      from "./groupsMachines/groupsMachines.component";
 import { ResultComponent }              from './result/result.component';
 
 import { WorkflowService }              from "./workflow/workflow.service";
@@ -22,7 +23,9 @@ export const appStates = [
     // 5th State
     { name: 'sitesGroups', url: '/sitesGroups',  component: SitesGroupsComponent, onEnter: verifyWorkFlow },
     // 6th State
-    { name: 'result', url: '/result',  component: ResultComponent, onEnter: verifyWorkFlow }
+    { name: 'groupsMachines', url: '/groupsMachines',  component: GroupsMachinesComponent, onEnter: verifyWorkFlow },
+    // 7th State
+    { name: 'finalResult', url: '/finalResult',  component: ResultComponent, onEnter: verifyWorkFlow }
 ];
 
 export function verifyWorkFlow(transition, state) {

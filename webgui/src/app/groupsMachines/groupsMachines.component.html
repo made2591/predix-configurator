@@ -1,0 +1,133 @@
+<form #machinesForms="ngForm" class="editForm" novalidate>
+    <div class="col s12 center" style="margin-top: 20px;">
+        <h5 class="center">{{title}}</h5>
+        <p class="light center">{{description}}</p>
+        <br>
+    </div>
+
+    <div class="tab-pane fade in active">
+        <form [formGroup]="machinesFormsWrapper" novalidate (ngSubmit)="save(machinesFormsWrapper)">
+            <div formArrayName="machinesForms">
+                <div *ngFor="let machinesForm of machinesFormsWrapper.controls.machinesForms.controls; let formIndex=index">
+                    <div [formGroupName]="formIndex" class="row z-depth-3 predix darken-4" style="padding: 25px 50px;">
+                        <div class="row">
+                            <div class="input-field col s3">
+                                <input class="form-control input-md" name="machinePlate" type="text"
+                                       placeholder="machinePlate"
+                                       formControlName="machinePlate">
+                            </div>
+
+                            <div class="input-field col s3">
+                                <input class="form-control input-md" name="machinePcu" type="text"
+                                       placeholder="machinePcu"
+                                       formControlName="machinePcu">
+                            </div>
+
+                            <div class="input-field col s3">
+                                <input class="form-control input-md" name="machineIp" type="text"
+                                       placeholder="machineIp"
+                                       formControlName="machineIp">
+                            </div>
+                            <div *ngIf="machinesFormsWrapper.controls.machinesForms.controls.length < 2" class="input-field col s1 offset-s2 center-align">
+                                <a class="btn-floating btn-small waves-effect waves-light light-blue"
+                                   name="addMachineForm" (click)="addMachineForm();"><i
+                                        class="material-icons">add</i></a>
+                            </div>
+                            <div *ngIf="machinesFormsWrapper.controls.machinesForms.controls.length > 1" class="input-field col s1 offset-s1 center-align">
+                                <a class="btn-floating btn-small waves-effect waves-light light-blue"
+                                   name="addMachineForm" (click)="addMachineForm();"><i
+                                        class="material-icons">add</i></a>
+                            </div>
+                            <div *ngIf="machinesFormsWrapper.controls.machinesForms.controls.length > 1"
+                                 class="input-field col s1 center-align">
+                                <a class="btn-floating btn-small waves-effect waves-light red"
+                                   name="removeMachineForm" (click)="removeMachineForm(formIndex);"><i
+                                        class="material-icons">delete</i></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s3">
+                                <input class="form-control input-md" name="machineNat" type="text"
+                                       placeholder="machineNat"
+                                       formControlName="machineNat">
+                            </div>
+                            <div class="input-field col s3">
+                                <input class="form-control input-md" name="machineInfo" type="text"
+                                       placeholder="machineInfo"
+                                       formControlName="machineInfo">
+                            </div>
+
+                            <div class="input-field col s3">
+                                <input class="form-control input-md" name="machineProtocol" type="text"
+                                       placeholder="machineProtocol"
+                                       formControlName="machineProtocol">
+                            </div>
+
+                            <div class="input-field col s3">
+                                <input class="form-control input-md" name="machineProtocol" type="text"
+                                       placeholder="machineProtocol"
+                                       formControlName="machineProtocol">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s3">
+                                <input class="form-control input-md" name="machineLocalTagMappingSchema" type="text"
+                                       placeholder="machineLocalTagMappingSchema"
+                                       formControlName="machineLocalTagMappingSchema">
+                            </div>
+
+                            <div class="input-field col s3">
+                                <input class="form-control input-md" name="machineLocalEnableSetup" type="text"
+                                       placeholder="machineLocalEnableSetup"
+                                       formControlName="machineLocalEnableSetup">
+                            </div>
+                            <!--<div class="input-field col s5">-->
+                            <!--<md-select id="schema{{formIndex+machineIndex}}"-->
+                            <!--formControlName="globalTagMappingSchema"-->
+                            <!--style="color: white; !important; width: 100%;">-->
+                            <!--<md-option value="" disabled>Choose your option</md-option>-->
+                            <!--<md-option *ngFor="let tagMappingSchema of tagMappingSchemas;"-->
+                            <!--[value]="tagMappingSchema"-->
+                            <!--&gt;{{tagMappingSchema}}</md-option>-->
+                            <!--</md-select>-->
+                            <!--&lt;!&ndash;<label for="schema{{formIndex+machineIndex}}">Materialize Select</label>&ndash;&gt;-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="row">-->
+            <!--<div class="input-field col s12 center-align">-->
+            <!--<button *ngIf="machinesFormsWrapper.controls.machinesForms.controls.length > 1" class="btn btn-success waves-effect waves-light btn-info red" (click)="removeNewTagMappingSchema(formIndex)">Delete Group-->
+            <!--<i class="material-icons right">delete</i>-->
+            <!--</button>-->
+            <!--<button class="btn btn-success waves-effect waves-light btn-info light-blue" (click)="addNewTagMappingSchema()">Add Group-->
+            <!--<i class="material-icons right">add</i>-->
+            <!--</button>-->
+            <!--</div>-->
+            <!--</div>-->
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12" style="text-align: center;">
+            <button uiSref="sitesGroups" class="btn waves-effect waves-light predix darken-2"
+                    (click)="save(machinesForms)">Previous Step
+                <i class="material-icons right">navigate_before</i>
+            </button>
+            <button class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset"
+                    id="reset">Reset Conf
+                <i class="material-icons right">delete</i>
+            </button>
+            <button class="btn waves-effect waves-light predix lighten-2" style="margin: 5px auto;" name="load"
+                    id="load">Load Conf
+                <i class="material-icons right">file_upload</i>
+            </button>
+            <button uiSref="finalResult" class="btn waves-effect waves-light predix darken-2"
+                    [disabled]="!machinesForms.valid" (click)="save(machinesForms)">Next Step
+                <i class="material-icons right">navigate_next</i>
+            </button>
+        </div>
+    </div>
+
+</form>
