@@ -22,18 +22,28 @@ export class TagMappingSchemaComponent implements OnInit {
     
     ngOnInit() {
         this.tagMappingSchema = this.predixConfigurationDataService.getTagMappingSchema();
+        
         this.tagMappingSchemaWrapper = this.formBuilder.group({
             tagMappingSchemaForms: this.formBuilder.array([
                 this.initTagMappingSchemaForm(),
             ])
         });
+        if(Object.keys(this.tagMappingSchema).length > 0) {
+            this.load();
+        }
         console.log('TagMappingSchema feature loaded!');
     }
     
-    initTagMappingSchemaForm() {
+    initTagMappingSchemaForm(msn?: string, cp?: string) {
+        
+        let msnr = [''];
+        let cpr  = [''];
+        if(msn) { msnr = [msn]; }
+        if(cp)  { cpr  = [cp];  }
+        
         return this.formBuilder.group({
-            mappingSchemaName: [''],
-            channelPrefix: [''],
+            mappingSchemaName: msnr,
+            channelPrefix: cpr,
             mappingSchemaDict: this.formBuilder.array([
                 this.initMappingSchemaForm()
             ])
@@ -53,10 +63,16 @@ export class TagMappingSchemaComponent implements OnInit {
         control.removeAt(i);
     }
     
-    initMappingSchemaForm() {
+    initMappingSchemaForm(tf?: string, tt?: string) : FormGroup {
+    
+        let tfr = [''];
+        let ttr  = [''];
+        if(tf) { tfr = [tf]; }
+        if(tt) { ttr = [tt]; }
+        
         return this.formBuilder.group({
-            tagFrom: [''],
-            tagTo: [''],
+            tagFrom: tfr,
+            tagTo: ttr,
         })
     }
     
@@ -77,11 +93,55 @@ export class TagMappingSchemaComponent implements OnInit {
         control.removeAt(ti);
     }
     
+    load() {
+        
+        // create new forms array
+        let tagMappingSchemaForms = this.formBuilder.array([]);
+    
+        // for each schema in tagMappingSchema
+        for(let nameTagMappingSchema in this.tagMappingSchema) {
+            
+            // create a new schema form
+            let tagMappingSchemaFrom = this.initTagMappingSchemaForm(
+                nameTagMappingSchema,
+                this.tagMappingSchema[nameTagMappingSchema]['CHANNEL_PREFIX']);
+    
+            // create a new tag mapping dict
+            let mappingSchemaDict = this.formBuilder.array([]);
+
+            // for each tag couple in tag mapping dict
+            for(let tagFrom in this.tagMappingSchema[nameTagMappingSchema]['MAPPING']) {
+                
+                // create a couple
+                let tagCouple = this.initMappingSchemaForm(
+                    tagFrom,
+                    this.tagMappingSchema[nameTagMappingSchema]['MAPPING'][tagFrom]);
+                
+                // add couple to dict
+                mappingSchemaDict.push(tagCouple);
+                
+            }
+
+            // add dict to specific tag mapping schema form
+            tagMappingSchemaFrom.controls['mappingSchemaDict'] = mappingSchemaDict;
+
+            // add entire wrapper to forms
+            tagMappingSchemaForms.push(tagMappingSchemaFrom);
+
+        }
+
+        // setup up external wrapper
+        this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'] = tagMappingSchemaForms;
+        
+    }
+    
     save(form: any) {
         
         // if (!form.valid)
         //     return;
     
+        this.tagMappingSchema = {};
+        
         const tagMappingSchemaForms = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
         
         // for each tagMappingSchemaForm
