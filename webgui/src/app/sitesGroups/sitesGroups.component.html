@@ -52,7 +52,7 @@
                                             <md-select id="schema{{formIndex+siteGroupIndex}}"
                                                        formControlName="globalTagMappingSchema"
                                                        style="color: white; !important; width: 100%;">
-                                                <md-option value="" disabled>Choose your option</md-option>
+                                                <md-option value="" disabled>Choose a Tag Mapping Schema</md-option>
                                                 <md-option *ngFor="let tagMappingSchema of tagMappingSchemas;"
                                                             [value]="tagMappingSchema"
                                                     >{{tagMappingSchema}}</md-option>
@@ -73,9 +73,9 @@
                                             <input class="form-control input-md" name="globalPrefix" type="text"
                                                    placeholder="GROUP GLOBAL PREFIX: Insert here the prefix to give at this group of machines" formControlName="globalPrefix">
                                         </div>
-                                        <div class="col s5">
+                                        <div class="col s5" style="margin-top: 10px;">
                                             <p>
-                                                <input type="checkbox" id="checkbox{{formIndex+siteGroupIndex}}"/><label
+                                                <input type="checkbox" id="checkbox{{formIndex+siteGroupIndex}}" formControlName="globalEnableSetup"/><label
                                                     for="checkbox{{formIndex+siteGroupIndex}}">Enable Group
                                                 Setup</label>
                                             </p>

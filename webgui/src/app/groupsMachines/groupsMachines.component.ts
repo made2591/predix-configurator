@@ -17,18 +17,53 @@ export class GroupsMachinesComponent implements OnInit {
     description = 'The final step is to define machines and add them to groups.';
     form: any;
     machines: {};
+    tagMappingSchemas: Array<String>;
+    sites: Array<String>;
+    sitesGroups: {};
     machinesFormsWrapper: FormGroup;
     
     constructor(private predixConfigurationDataService: PredixConfigurationDataService, private formBuilder: FormBuilder) {
     }
     
     ngOnInit() {
+        // create tag mapping schema
+        this.tagMappingSchemas = [];
+        for (let key in this.predixConfigurationDataService.getTagMappingSchema()) {
+            this.tagMappingSchemas.push(key);
+        }
+    
+        let sitesFromModel = this.predixConfigurationDataService.getSitesGroups();
+        
+        // create site array
+        this.sites = [];
+        // create site group dict
+        this.sitesGroups = {};
+
+        // for each site
+        for (let siteName in sitesFromModel) {
+
+            // add site to site array
+            this.sites.push(siteName);
+            
+            // add site group to dict
+            this.sitesGroups[siteName] = [];
+
+            for (let groupName in sitesFromModel[siteName]) {
+                this.sitesGroups[siteName].push(groupName);
+            }
+
+        }
+    
+        console.log(this.sitesGroups);
+    
         this.machinesFormsWrapper = this.formBuilder.group({
             machinesForms: this.formBuilder.array([
                 this.initMachineForm(),
             ])
         });
+
         console.log('SitesGroupsComponent feature loaded!');
+
     }
     
     initMachineForm(mp? : string) {
@@ -43,10 +78,9 @@ export class GroupsMachinesComponent implements OnInit {
             machineNat: [''],
             machineInfo: [''],
             machineProtocol: [''],
-            machineLocalTagMappingSchema: [''],
             machineLocalEnableSetup: new FormControl(true),
-            machineSite: [''],
-            machineGroup: [''],
+            machineLocalTagMappingSchema: [''],
+            machineSiteGroup: [''],
         });
     }
     
@@ -57,8 +91,6 @@ export class GroupsMachinesComponent implements OnInit {
     
     removeMachineForm(i: number) {
         const control = <FormArray>this.machinesFormsWrapper.controls['machinesForms'];
-//        let siteName = (<FormArray>
-//            (<FormGroup>this.machinesFormsWrapper.controls['sitesGroupsForms']).controls[i]).get('machinePlate').value;
         console.log(this.machines);
         control.removeAt(i);
     }

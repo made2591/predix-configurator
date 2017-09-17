@@ -12,10 +12,10 @@
                     <div [formGroupName]="formIndex" class="row z-depth-3 predix darken-4" style="padding: 25px 50px;">
                         <div *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length > 1">
                             <div class="input-field col s5">
-                                <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="Tag Mapping Group Name" formControlName="mappingSchemaName">
+                                <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="MAPPING_SCHEMA_NAME: Tag Mapping Group Name" formControlName="mappingSchemaName">
                             </div>
                             <div class="input-field col s5">
-                                <input class="form-control input-md" name="channelPrefix" type="text" placeholder="Channel Mapping Prefix" formControlName="channelPrefix">
+                                <input class="form-control input-md" name="channelPrefix" type="text" placeholder="CHANNEL_PREFIX: Channel Mapping Prefix" formControlName="channelPrefix">
                             </div>
                             <div class="input-field col s1 center-align">
                                 <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addNewTagMappingSchema();"><i class="material-icons">add</i></a>
@@ -26,10 +26,10 @@
                         </div>
                         <div *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length <= 1">
                             <div class="input-field col s6">
-                                <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="Tag Mapping Group Name" formControlName="mappingSchemaName">
+                                <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="MAPPING_SCHEMA_NAME: Tag Mapping Group Name" formControlName="mappingSchemaName">
                             </div>
                             <div class="input-field col s5">
-                                <input class="form-control input-md" name="channelPrefix" type="text" placeholder="Channel Mapping Prefix" formControlName="channelPrefix">
+                                <input class="form-control input-md" name="channelPrefix" type="text" placeholder="CHANNEL_PREFIX: Channel Mapping Prefix" formControlName="channelPrefix">
                             </div>
                             <div class="input-field col s1 center-align">
                                 <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addNewTagMappingSchema();"><i class="material-icons">add</i></a>
@@ -40,10 +40,10 @@
                                 <div [formGroupName]="coupleTagIndex">
                                     <div *ngIf="tagMappingSchemaForm.controls.mappingSchemaDict.controls.length > 1">
                                         <div class="input-field col s4 offset-s1">
-                                            <input class="form-control input-md" name="tagFrom" type="text" placeholder="tagFrom" formControlName="tagFrom">
+                                            <input class="form-control input-md" name="tagFrom" type="text" placeholder="TAG_FROM: Predix Cloud Tag" formControlName="tagFrom">
                                         </div>
                                         <div class="input-field col s5">
-                                            <input class="form-control input-md" name="tagTo" type="text" placeholder="tagTo" formControlName="tagTo">
+                                            <input class="form-control input-md" name="tagTo" type="text" placeholder="TAG_TO: IGS Tag" formControlName="tagTo">
                                         </div>
                                         <div class="input-field col s1 center-align">
                                             <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addNewTagCouple(formIndex);"><i class="material-icons">add</i></a>
@@ -54,10 +54,10 @@
                                     </div>
                                     <div *ngIf="tagMappingSchemaForm.controls.mappingSchemaDict.controls.length <= 1">
                                         <div class="input-field col s5 offset-s1">
-                                            <input class="form-control input-md" name="tagFrom" type="text" placeholder="Predix Cloud Tag" formControlName="tagFrom">
+                                            <input class="form-control input-md" name="tagFrom" type="text" placeholder="TAG_FROM: Predix Cloud Tag" formControlName="tagFrom">
                                         </div>
                                         <div class="input-field col s5">
-                                            <input class="form-control input-md" name="tagTo" type="text" placeholder="IGS Tag" formControlName="tagTo">
+                                            <input class="form-control input-md" name="tagTo" type="text" placeholder="TAG_TO: IGS Tag" formControlName="tagTo">
                                         </div>
                                         <div class="input-field col s1 center-align">
                                             <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addNewTagCouple(formIndex);"><i class="material-icons">add</i></a>
@@ -67,16 +67,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div class="row">-->
-                        <!--<div class="input-field col s12 center-align">-->
-                            <!--<button *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length > 1" class="btn btn-success waves-effect waves-light btn-info red" (click)="removeNewTagMappingSchema(formIndex)">Delete Group-->
-                                <!--<i class="material-icons right">delete</i>-->
-                            <!--</button>-->
-                            <!--<button class="btn btn-success waves-effect waves-light btn-info light-blue" (click)="addNewTagMappingSchema()">Add Group-->
-                                <!--<i class="material-icons right">add</i>-->
-                            <!--</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </div>
             </div>
         </form>

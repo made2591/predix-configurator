@@ -13,19 +13,17 @@
                         <div class="row">
                             <div class="input-field col s3">
                                 <input class="form-control input-md" name="machinePlate" type="text"
-                                       placeholder="machinePlate"
+                                       placeholder="MACHINE_PLATE"
                                        formControlName="machinePlate">
                             </div>
-
                             <div class="input-field col s3">
                                 <input class="form-control input-md" name="machinePcu" type="text"
-                                       placeholder="machinePcu"
+                                       placeholder="MACHINE_PCU"
                                        formControlName="machinePcu">
                             </div>
-
                             <div class="input-field col s3">
                                 <input class="form-control input-md" name="machineIp" type="text"
-                                       placeholder="machineIp"
+                                       placeholder="MACHINE_IP"
                                        formControlName="machineIp">
                             </div>
                             <div *ngIf="machinesFormsWrapper.controls.machinesForms.controls.length < 2" class="input-field col s1 offset-s2 center-align">
@@ -46,66 +44,57 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s3">
+                            <div class="input-field col s4">
                                 <input class="form-control input-md" name="machineNat" type="text"
-                                       placeholder="machineNat"
+                                       placeholder="MACHINE_NATTED_IP"
                                        formControlName="machineNat">
                             </div>
-                            <div class="input-field col s3">
+                            <div class="input-field col s4">
                                 <input class="form-control input-md" name="machineInfo" type="text"
-                                       placeholder="machineInfo"
+                                       placeholder="MACHINE_INFO"
                                        formControlName="machineInfo">
                             </div>
-
-                            <div class="input-field col s3">
+                            <div class="input-field col s4">
                                 <input class="form-control input-md" name="machineProtocol" type="text"
-                                       placeholder="machineProtocol"
-                                       formControlName="machineProtocol">
-                            </div>
-
-                            <div class="input-field col s3">
-                                <input class="form-control input-md" name="machineProtocol" type="text"
-                                       placeholder="machineProtocol"
+                                       placeholder="MACHINE_PROTOCOL"
                                        formControlName="machineProtocol">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s3">
-                                <input class="form-control input-md" name="machineLocalTagMappingSchema" type="text"
-                                       placeholder="machineLocalTagMappingSchema"
-                                       formControlName="machineLocalTagMappingSchema">
+                            <div class="col s3">
+                                <p>
+                                    <input type="checkbox" id="checkbox{{formIndex}}" formControlName="machineLocalEnableSetup"/><label
+                                        for="checkbox{{formIndex}}">Enable Machine Setup</label>
+                                </p>
                             </div>
-
-                            <div class="input-field col s3">
-                                <input class="form-control input-md" name="machineLocalEnableSetup" type="text"
-                                       placeholder="machineLocalEnableSetup"
-                                       formControlName="machineLocalEnableSetup">
+                            <div class="col s4">
+                                <md-select id="schema{{formIndex}}"
+                                           formControlName="machineLocalTagMappingSchema"
+                                           style="color: white; !important; width: 100%;">
+                                    <md-option value="" disabled>Choose a Tag Mapping Schema</md-option>
+                                    <md-option *ngFor="let tagMappingSchema of tagMappingSchemas;"
+                                               [value]="tagMappingSchema"
+                                    >{{tagMappingSchema}}</md-option>
+                                </md-select>
                             </div>
-                            <!--<div class="input-field col s5">-->
-                            <!--<md-select id="schema{{formIndex+machineIndex}}"-->
-                            <!--formControlName="globalTagMappingSchema"-->
-                            <!--style="color: white; !important; width: 100%;">-->
-                            <!--<md-option value="" disabled>Choose your option</md-option>-->
-                            <!--<md-option *ngFor="let tagMappingSchema of tagMappingSchemas;"-->
-                            <!--[value]="tagMappingSchema"-->
-                            <!--&gt;{{tagMappingSchema}}</md-option>-->
-                            <!--</md-select>-->
-                            <!--&lt;!&ndash;<label for="schema{{formIndex+machineIndex}}">Materialize Select</label>&ndash;&gt;-->
-                            <!--</div>-->
+                            <div class="col s5">
+                                <md-select id="site{{formIndex}}"
+                                           formControlName="machineSiteGroup"
+                                           style="color: white; !important; width: 100%;">
+                                    <md-option value="" disabled>Choose a belonging Machine Group (between Sites)</md-option>
+                                    <md-optgroup *ngFor="let site of sites;"
+                                               [label]="site"
+                                    >
+                                    <md-option *ngFor="let group of sitesGroups[site];"
+                                                 [value]="site+';'+group"
+                                    >{{group}}</md-option>
+                                    </md-optgroup>
+                                </md-select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--<div class="row">-->
-            <!--<div class="input-field col s12 center-align">-->
-            <!--<button *ngIf="machinesFormsWrapper.controls.machinesForms.controls.length > 1" class="btn btn-success waves-effect waves-light btn-info red" (click)="removeNewTagMappingSchema(formIndex)">Delete Group-->
-            <!--<i class="material-icons right">delete</i>-->
-            <!--</button>-->
-            <!--<button class="btn btn-success waves-effect waves-light btn-info light-blue" (click)="addNewTagMappingSchema()">Add Group-->
-            <!--<i class="material-icons right">add</i>-->
-            <!--</button>-->
-            <!--</div>-->
-            <!--</div>-->
         </form>
     </div>
 

@@ -28,9 +28,6 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
         console.log(this.predixConfigurationDataService.getTagMappingSchema());
         this.tagMappingSchemas = [];
         for (let key in this.predixConfigurationDataService.getTagMappingSchema()) {
-            // let key = entry[0];
-            // let value = myDictionary[key];
-            // Use `key` and `value`
             this.tagMappingSchemas.push(key);
         }
         this.sitesGroupsWrapper = this.formBuilder.group({
@@ -209,7 +206,7 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
                 // if the groupName is not null in any sense
                 if (groupName !== null && groupName.length > 0) {
                     // handle double names to
-                    if (groupName in this.sitesGroups[siteName] != null) {
+                    if (groupName in this.sitesGroups[siteName]) {
                         groupName = groupName + (k.toString());
                     }
                 }
