@@ -159,6 +159,8 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
         //     return;
         
         this.sitesGroups = {};
+        //TODO: RICOSTRUISCI LE MACHINE
+        //this.predixConfigurationDataService.getMachines();
         
         const sitesGroupsForms = <FormArray>this.sitesGroupsWrapper.controls['sitesGroupsForms'];
 

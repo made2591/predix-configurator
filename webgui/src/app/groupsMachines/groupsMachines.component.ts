@@ -85,7 +85,7 @@ export class GroupsMachinesComponent implements OnInit {
         let mnatr = [''];
         let mir = [''];
         let mprotr = [''];
-        let mlesr = [''];
+        let mlesr = new FormControl(true);
         let mltmsr = [this.tagMappingSchemas[0]];
         let msgr = [this.sites[0]+";"+this.firstGroup];
         if(mp) { mpr = [mp]; }
@@ -94,7 +94,7 @@ export class GroupsMachinesComponent implements OnInit {
         if(mnat) { mnatr = [mnat]; }
         if(mi) { mir = [mi]; }
         if(mprot) { mprotr = [mprot]; }
-        if(mles) { mlesr = [mles]; }
+        if(mles) { mlesr = new FormControl(mles); }
         if(mltms) { mltmsr = [mltms]; }
         if(msg) { msgr = [msg]; }
 

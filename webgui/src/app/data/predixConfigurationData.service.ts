@@ -152,6 +152,8 @@ export class PredixConfigurationDataService {
     getMachines(): {} {
         
         let machines = {};
+    
+        console.log("SITES: ", this.predixConfigurationData.SITES);
         
         for (let site in this.predixConfigurationData.SITES) {
             
@@ -161,6 +163,7 @@ export class PredixConfigurationDataService {
                     
                     machines[machine] = this.predixConfigurationData.SITES[site][group]['MACHINES'][machine];
                     machines[machine]['SITE_GROUP'] = site+";"+group;
+                    
                 }
                 
             }
@@ -186,7 +189,50 @@ export class PredixConfigurationDataService {
         // Update the PredixGlobalConfig data only when the PredixGlobalConfig Form had been validated successfully
         this.isSitesGroupsValid = true;
         
-        this.predixConfigurationData.SITES = data;
+        // if there are some sites already defined
+        if(Object.keys(this.predixConfigurationData.SITES).length > 0) {
+            
+            // for each site in data
+            for (let site in data) {
+
+                // if site is already defined in model
+                if (site in this.predixConfigurationData.SITES) {
+    
+                    // for each group in site data
+                    for (let group in data[site]) {
+
+                        // if group is already defined in model
+                        if (group in this.predixConfigurationData.SITES[site]) {
+    
+                            // change machines defined in group of site data to the ones defined in group of site in model
+                            data[site][group].MACHINES = this.predixConfigurationData.SITES[site][group].MACHINES;
+                            // update site and group with new information, preserving machines defined in previous step (eventually)
+                            this.predixConfigurationData.SITES[site][group] = data[site][group];
+    
+                        } else {
+
+                            // it is a new group so simply add group because no machines could be already added to group
+                            this.predixConfigurationData.SITES[site][group] = data[site][group];
+                            
+                        }
+        
+                    }
+    
+                } else {
+    
+                    // it is a new site so simply add site because no machines nor group could be already added to site
+                    this.predixConfigurationData.SITES[site] = data[site];
+                    
+                }
+                    
+            }
+            
+        } else {
+    
+            // machines step never occurred
+            this.predixConfigurationData.SITES = data;
+            
+        }
         
         // Validate PredixGlobalConfig Step in Workflow
         this.workflowService.validateStep(STEPS.sitesGroups);

@@ -8,8 +8,8 @@ export class PredixConfigurationData {
     TAG_MAPPING_SCHEMA:
         { [TAG_MAPPING_SCHEMA_NAME: string] :
             MappingSchema; }                    = {};
-    SITES: { [SITE_NAME: string] :
-        MachineGroup; }                         = {};
+    SITES: { [SITE_NAME: string] : { [MACHINE_GROUP_NAME: string] : MachineGroup }; }
+                                                = {};
     
     setDefault() {
 
