@@ -190,8 +190,8 @@ export class Machine {
     NAT: string;
     INFO: string;
     PROTOCOL: string;
-    LOCAL_TAG_MAPPING_SCHEMA: string;
     LOCAL_ENABLE_SETUP: string;
+    LOCAL_TAG_MAPPING_SCHEMA: string;
 }
 
 export class MachineGroup {

@@ -1,7 +1,7 @@
 import { Injectable }               from '@angular/core';
 
 import {
-    PredixConfigurationData, IgsConfig, PredixGlobalConfig, PredixCloudConfig, MachineGroup
+    PredixConfigurationData, IgsConfig, PredixGlobalConfig, PredixCloudConfig, MachineGroup, Machine
 } from './predixConfigurationData.model';
 
 import { WorkflowService }          from '../workflow/workflow.service';
@@ -145,6 +145,38 @@ export class PredixConfigurationDataService {
     getSitesGroups(): {} {
         
         return this.predixConfigurationData.SITES;
+        
+    }
+    
+    // Return the Machines data + group and site info
+    getMachines(): {} {
+        
+        let machines = {};
+        
+        for (let site in this.predixConfigurationData.SITES) {
+            
+            for (let group in this.predixConfigurationData.SITES[site]) {
+                
+                for (let machine in this.predixConfigurationData.SITES[site][group]['MACHINES']) {
+                    
+                    machines[machine] = this.predixConfigurationData.SITES[site][group]['MACHINES'][machine];
+                    machines[machine]['SITE_GROUP'] = site+";"+group;
+                }
+                
+            }
+            
+        }
+
+        console.log("Machines: ", machines);
+        
+        return machines;
+        
+    }
+    
+    // Set a Machine in a specific Group and Site
+    setMachine(machinePlate: string, machine: Machine, site: string, group: string) {
+        
+        this.predixConfigurationData.SITES[site][group]['MACHINES'][machinePlate] = machine;
         
     }
     

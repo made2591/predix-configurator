@@ -175,7 +175,7 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
             if (siteName !== null && siteName.length > 0) {
                 // handle double names to
                 if (siteName in this.sitesGroups) {
-                    siteName = siteName + (i.toString());
+                    siteName = siteName+"_"+(i.toString());
                 }
             }
             // create automatic name
@@ -207,7 +207,7 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
                 if (groupName !== null && groupName.length > 0) {
                     // handle double names to
                     if (groupName in this.sitesGroups[siteName]) {
-                        groupName = groupName + (k.toString());
+                        groupName = groupName+"_"+(k.toString());
                     }
                 }
                 // create automatic name for the groupName

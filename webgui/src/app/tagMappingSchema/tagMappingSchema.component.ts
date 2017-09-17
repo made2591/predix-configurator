@@ -157,7 +157,7 @@ export class TagMappingSchemaComponent implements OnInit {
             if (mappingSchemaName !== null && mappingSchemaName.length > 0) {
                 // handle double names to
                 if (mappingSchemaName in this.tagMappingSchema) {
-                    mappingSchemaName = mappingSchemaName + (i.toString());
+                    mappingSchemaName = mappingSchemaName+"_"+(i.toString());
                 }
             }
             // create automatic name
@@ -196,7 +196,7 @@ export class TagMappingSchemaComponent implements OnInit {
                 if (tagFrom !== null && tagFrom.length > 0) {
                     // handle double names to
                     if ((<MappingSchema>this.tagMappingSchema[mappingSchemaName]).getElementWithKey(tagFrom) != null) {
-                        tagFrom = tagFrom + (k.toString());
+                        tagFrom = tagFrom+"_"+(k.toString());
                     }
                 }
                 // create automatic name for the tag
