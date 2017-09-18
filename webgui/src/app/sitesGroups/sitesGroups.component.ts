@@ -70,8 +70,9 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
         const control = <FormArray>this.sitesGroupsWrapper.controls['sitesGroupsForms'];
         let siteName = (<FormArray>
             (<FormGroup>this.sitesGroupsWrapper.controls['sitesGroupsForms']).controls[i]).get('siteName').value;
-        console.log(this.sitesGroups);
         control.removeAt(i);
+        delete this.sitesGroups[siteName];
+        console.log(this.sitesGroups);
     }
     
     initGroupForm(gn? : string, gtms?: string, gp?: string, ges?: boolean) {
@@ -103,9 +104,18 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
     
     removeGroup(fi: number, ti: number) {
         console.log(<FormArray>this.sitesGroupsWrapper.controls['sitesGroupsForms']);
-        const control = <FormArray>(
-            <FormArray>(
-                <FormGroup>this.sitesGroupsWrapper.controls['sitesGroupsForms']).controls[fi]).controls['groups'];
+        let siteName =
+            (<FormArray>
+                (<FormGroup>this.sitesGroupsWrapper.controls['sitesGroupsForms']).controls[fi]).get('siteName').value;
+        const control =
+            <FormArray>
+                (<FormArray>
+                    (<FormGroup>this.sitesGroupsWrapper.controls['sitesGroupsForms']).controls[fi]).controls['groups'];
+        let groupName =
+                (<FormArray>
+                    (<FormArray>
+                        (<FormGroup>this.sitesGroupsWrapper.controls['sitesGroupsForms']).controls[fi]).controls['groups']).controls[ti].get('groupName').value;
+        delete this.sitesGroups[siteName][groupName];
         control.removeAt(ti);
     }
     

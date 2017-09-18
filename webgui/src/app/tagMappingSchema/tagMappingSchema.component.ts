@@ -59,8 +59,9 @@ export class TagMappingSchemaComponent implements OnInit {
         const control = <FormArray>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms'];
         let mappingSchemaName = (<FormArray>
             (<FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[i]).get('mappingSchemaName').value;
-        console.log(this.tagMappingSchema);
+        delete this.tagMappingSchema[mappingSchemaName];
         control.removeAt(i);
+        console.log(this.tagMappingSchema);
     }
     
     initMappingSchemaForm(tf?: string, tt?: string) : FormGroup {
@@ -81,7 +82,6 @@ export class TagMappingSchemaComponent implements OnInit {
         const control = <FormArray>(
             <FormArray>(
                 <FormGroup>this.tagMappingSchemaWrapper.controls['tagMappingSchemaForms']).controls[fi]).controls['mappingSchemaDict'];
-        
         control.push(this.initMappingSchemaForm());
     }
     

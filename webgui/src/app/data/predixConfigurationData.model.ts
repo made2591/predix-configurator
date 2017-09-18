@@ -190,7 +190,7 @@ export class Machine {
     NAT: string;
     INFO: string;
     PROTOCOL: string;
-    LOCAL_ENABLE_SETUP: string;
+    LOCAL_ENABLE_SETUP: boolean;
     LOCAL_TAG_MAPPING_SCHEMA: string;
 }
 

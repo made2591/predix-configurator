@@ -105,7 +105,7 @@ export class GroupsMachinesComponent implements OnInit {
             machineNat: mnatr,
             machineInfo: mir,
             machineProtocol: mprotr,
-            machineLocalEnableSetup: new FormControl(mlesr),
+            machineLocalEnableSetup: mlesr,
             machineLocalTagMappingSchema: mltmsr,
             machineSiteGroup: msgr,
         });
@@ -118,8 +118,11 @@ export class GroupsMachinesComponent implements OnInit {
     
     removeMachineForm(i: number) {
         const control = <FormArray>this.machinesFormsWrapper.controls['machinesForms'];
-        console.log(this.machines);
+        let machinePlate = (<FormArray>
+            (<FormGroup>this.machinesFormsWrapper.controls['machinesForms']).controls[i]).get('machinePlate').value;
+        delete this.machines[machinePlate];
         control.removeAt(i);
+        console.log(this.machines);
     }
     
     load() {
@@ -198,59 +201,59 @@ export class GroupsMachinesComponent implements OnInit {
     
             // create Key in TAG_MAPPING_SCHEMA var
             this.machines[machinePlate].PCU =
-                (<FormGroup>
+                <FormGroup>
                     (<FormArray>
                         (<FormGroup>this.machinesFormsWrapper.controls['machinesForms'])
-                            .controls[i]).get('machinePcu')).value;
+                            .controls[i]).get('machinePcu').value;
     
             // create Key in TAG_MAPPING_SCHEMA var
             this.machines[machinePlate].IP =
-                (<FormGroup>
+                <FormGroup>
                     (<FormArray>
                         (<FormGroup>this.machinesFormsWrapper.controls['machinesForms'])
-                            .controls[i]).get('machineIp')).value;
+                            .controls[i]).get('machineIp').value;
     
             // create Key in TAG_MAPPING_SCHEMA var
             this.machines[machinePlate].NAT =
-                (<FormGroup>
+                <FormGroup>
                     (<FormArray>
                         (<FormGroup>this.machinesFormsWrapper.controls['machinesForms'])
-                            .controls[i]).get('machineNat')).value;
+                            .controls[i]).get('machineNat').value;
     
             // create Key in TAG_MAPPING_SCHEMA var
             this.machines[machinePlate].INFO =
-                (<FormGroup>
+                <FormGroup>
                     (<FormArray>
                         (<FormGroup>this.machinesFormsWrapper.controls['machinesForms'])
-                            .controls[i]).get('machineInfo')).value;
+                            .controls[i]).get('machineInfo').value;
     
             // create Key in TAG_MAPPING_SCHEMA var
             this.machines[machinePlate].PROTOCOL =
-                (<FormGroup>
+                <FormGroup>
                     (<FormArray>
                         (<FormGroup>this.machinesFormsWrapper.controls['machinesForms'])
-                            .controls[i]).get('machineProtocol')).value;
+                            .controls[i]).get('machineProtocol').value;
     
             // create Key in TAG_MAPPING_SCHEMA var
             this.machines[machinePlate].LOCAL_ENABLE_SETUP =
-                (<FormGroup>
+                <FormGroup>
                     (<FormArray>
                         (<FormGroup>this.machinesFormsWrapper.controls['machinesForms'])
-                            .controls[i]).get('machineLocalEnableSetup')).value;
+                            .controls[i]).get('machineLocalEnableSetup').value;
     
             // create Key in TAG_MAPPING_SCHEMA var
             this.machines[machinePlate].LOCAL_TAG_MAPPING_SCHEMA =
-                (<FormGroup>
+                <FormGroup>
                     (<FormArray>
                         (<FormGroup>this.machinesFormsWrapper.controls['machinesForms'])
-                            .controls[i]).get('machineLocalTagMappingSchema')).value;
+                            .controls[i]).get('machineLocalTagMappingSchema').value;
     
             // create Key in TAG_MAPPING_SCHEMA var
             let machineSiteGroupCouple =
-                (<FormGroup>
+                <FormGroup>
                     (<FormArray>
                         (<FormGroup>this.machinesFormsWrapper.controls['machinesForms'])
-                            .controls[i]).get('machineSiteGroup')).value.split(";");
+                            .controls[i]).get('machineSiteGroup').value.split(";");
             
             this.predixConfigurationDataService.setMachine(
                 machinePlate,
