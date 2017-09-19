@@ -26,6 +26,12 @@
                                        placeholder="MACHINE_IP"
                                        formControlName="machineIp">
                             </div>
+                            <div *ngIf="machinesFormsWrapper.controls.machinesForms.controls.length > 1"
+                                 class="input-field col s1 center-align">
+                                <a class="btn-floating btn-small waves-effect waves-light red"
+                                   name="removeMachineForm" (click)="removeMachineForm(formIndex);"><i
+                                        class="material-icons">delete</i></a>
+                            </div>
                             <div *ngIf="machinesFormsWrapper.controls.machinesForms.controls.length < 2" class="input-field col s1 offset-s2 center-align">
                                 <a class="btn-floating btn-small waves-effect waves-light light-blue"
                                    name="addMachineForm" (click)="addMachineForm();"><i
@@ -35,12 +41,6 @@
                                 <a class="btn-floating btn-small waves-effect waves-light light-blue"
                                    name="addMachineForm" (click)="addMachineForm();"><i
                                         class="material-icons">add</i></a>
-                            </div>
-                            <div *ngIf="machinesFormsWrapper.controls.machinesForms.controls.length > 1"
-                                 class="input-field col s1 center-align">
-                                <a class="btn-floating btn-small waves-effect waves-light red"
-                                   name="removeMachineForm" (click)="removeMachineForm(formIndex);"><i
-                                        class="material-icons">delete</i></a>
                             </div>
                         </div>
                         <div class="row">
@@ -104,8 +104,8 @@
                     (click)="save(machinesForms)">Previous Step
                 <i class="material-icons right">navigate_before</i>
             </button>
-            <button class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset"
-                    id="reset">Reset Conf
+            <button uiSref="homePage" class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset"
+                    id="reset" (click)="reset()">Reset Conf
                 <i class="material-icons right">delete</i>
             </button>
             <button class="btn waves-effect waves-light predix lighten-2" style="margin: 5px auto;" name="load"

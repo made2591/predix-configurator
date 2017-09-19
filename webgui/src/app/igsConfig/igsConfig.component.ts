@@ -29,5 +29,11 @@ export class IgsConfigComponent implements OnInit {
             return;
         this.predixConfigurationDataService.setIgsConfig(this.igsConfig);
     }
-
+    
+    reset() {
+        
+        this.predixConfigurationDataService.setPredixConfigurationData(this.predixConfigurationDataService.resetPredixConfigurationData());
+        
+    }
+    
 }

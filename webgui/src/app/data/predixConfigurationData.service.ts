@@ -16,6 +16,7 @@ export class PredixConfigurationDataService {
     private isPredixCloudConfigValid:   boolean = false;
     private isTagMappingSchemaValid:    boolean = false;
     private isSitesGroupsValid:         boolean = false;
+    private isGroupsMachinesValid:      boolean = false;
 
     constructor(private workflowService: WorkflowService) {
         
@@ -180,6 +181,8 @@ export class PredixConfigurationDataService {
     setMachine(machinePlate: string, machine: Machine, site: string, group: string) {
         
         this.predixConfigurationData.SITES[site][group]['MACHINES'][machinePlate] = machine;
+    
+        this.workflowService.validateStep(STEPS.groupsMachines);
         
     }
     
@@ -243,6 +246,10 @@ export class PredixConfigurationDataService {
         return this.predixConfigurationData;
     }
     
+    setPredixConfigurationData(data : PredixConfigurationData) {
+        this.predixConfigurationData = data;
+    }
+    
     resetPredixConfigurationData(): PredixConfigurationData {
 
         // Reset the workflow
@@ -250,7 +257,7 @@ export class PredixConfigurationDataService {
 
         // Return the form data after all this.* members had been reset
         this.predixConfigurationData.clear();
-        this.isIgsConfigValid = this.isPredixGlobalConfigValid = this.isTagMappingSchemaValid = this.isSitesGroupsValid = false;
+        this.isIgsConfigValid = this.isPredixGlobalConfigValid = this.isTagMappingSchemaValid = this.isSitesGroupsValid = this.isGroupsMachinesValid = false;
 
         return this.predixConfigurationData;
     }
@@ -258,7 +265,7 @@ export class PredixConfigurationDataService {
     isPredixConfigurationDataValid() {
 
         // Return true if all forms had been validated successfully; otherwise, return false
-        return this.isIgsConfigValid && this.isPredixGlobalConfigValid && this.isTagMappingSchemaValid && this.isSitesGroupsValid;
+        return this.isIgsConfigValid && this.isPredixGlobalConfigValid && this.isTagMappingSchemaValid && this.isSitesGroupsValid && this.isGroupsMachinesValid;
 
     }
 

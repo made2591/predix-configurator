@@ -22,7 +22,14 @@ export class ResultComponent implements OnInit {
     
     submit() {
         alert('Excellent Job!');
-        this.predixConfigurationData = this.predixConfigurationDataService.resetPredixConfigurationData();
+        this.predixConfigurationData = this.predixConfigurationDataService.setPredixConfigurationData(this.predixConfigurationDataService.resetPredixConfigurationData());
         this.isPredixConfigurationDataValid = false;
     }
+    
+    reset() {
+        
+        this.predixConfigurationDataService.setPredixConfigurationData(this.predixConfigurationDataService.resetPredixConfigurationData());
+        
+    }
+    
 }

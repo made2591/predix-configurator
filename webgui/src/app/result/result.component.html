@@ -16,10 +16,10 @@
                             configurator</p>
                         <br>
                     </div>
-                    <div class="input-field col s12"
-                         style="background-color: #F1F1F1; border: none; border: 1px solid #c7c7c7; border-radius: 0;">
+                    <div class="input-field col s12" class="z-depth-3 predix darken-4" style="padding: 25px 50px;">
+                         <!--style="background-color: #F1F1F1; border: none; border: 1px solid #c7c7c7; border-radius: 0;">-->
                         <textarea id="textarea1" class="materialize-textarea black-text"
-                                  style="min-height: 200px; overflow: scroll;">{{ predixConfigurationData | json }}</textarea>
+                                  style="font-family: 'Courier'; font-size: 14px; min-height: 400px; overflow: scroll;">{{ predixConfigurationData | json }}</textarea>
                     </div>
                 </div>
             </form>
@@ -32,8 +32,8 @@
                     (click)="save(predixConfigurationData)">Previous Step
                 <i class="material-icons right">navigate_before</i>
             </button>
-            <button class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset"
-                    id="reset">Reset Conf
+            <button uiSref="homePage" class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset"
+                    id="reset" (click)="reset()">Reset Conf
                 <i class="material-icons right">delete</i>
             </button>
             <button class="btn waves-effect waves-light predix lighten-2" style="margin: 5px auto;" name="load"

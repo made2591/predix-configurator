@@ -17,14 +17,14 @@
                                        formControlName="siteName">
                             </div>
                             <div class="input-field col s1 center-align">
-                                <a class="btn-floating btn-small waves-effect waves-light light-blue"
-                                   name="addSiteGroupsForm" (click)="addSiteGroupsForm();"><i
-                                        class="material-icons">add</i></a>
-                            </div>
-                            <div class="input-field col s1 center-align">
                                 <a class="btn-floating btn-small waves-effect waves-light red"
                                    name="removeSiteGroupsForm" (click)="removeSiteGroupsForm(formIndex);"><i
                                         class="material-icons">delete</i></a>
+                            </div>
+                            <div class="input-field col s1 center-align">
+                                <a class="btn-floating btn-small waves-effect waves-light light-blue"
+                                   name="addSiteGroupsForm" (click)="addSiteGroupsForm();"><i
+                                        class="material-icons">add</i></a>
                             </div>
                         </div>
                         <div *ngIf="sitesGroupsWrapper.controls.sitesGroupsForms.controls.length <= 1">
@@ -113,8 +113,8 @@
                     (click)="save(sitesGroupsForms)">Previous Step
                 <i class="material-icons right">navigate_before</i>
             </button>
-            <button class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset"
-                    id="reset">Reset Conf
+            <button uiSref="homePage" class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset"
+                    id="reset" (click)="reset()">Reset Conf
                 <i class="material-icons right">delete</i>
             </button>
             <button class="btn waves-effect waves-light predix lighten-2" style="margin: 5px auto;" name="load"

@@ -78,7 +78,7 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
     initGroupForm(gn? : string, gtms?: string, gp?: string, ges?: boolean) {
     
         let gnr   = [''];
-        let gtmsr = [''];
+        let gtmsr = [this.tagMappingSchemas[0]];
         let gpr   = [''];
         let gesr  = new FormControl(true);
         if(gn)   { gnr = [gn]; }
@@ -271,6 +271,12 @@ export class SitesGroupsComponent implements OnInit { //AfterViewInit, AfterView
         console.log(this.sitesGroups);
         
         this.predixConfigurationDataService.setSitesGroups(this.sitesGroups);
+        
+    }
+    
+    reset() {
+        
+        this.predixConfigurationDataService.setPredixConfigurationData(this.predixConfigurationDataService.resetPredixConfigurationData());
         
     }
     

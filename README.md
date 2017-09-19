@@ -150,6 +150,71 @@ You can easly add new Tag Schema using web app.
 
 ![Picture](images/screen-tag-schemas.gif)
 
+##### SITES
+
+The __```SITES```__ key in the root of JSON specify Sites and Groups of machine: it is a dict, with key defining Site names, that maps into another dict, with key defining Group name, the maps into another dict with values defining the specific Group.
+In the last step before result you can define machines for each Group in each Site. The key are clear: ```GLOBAL_ENABLE_SETUP``` enable setup for each machine, ```GLOBAL_TAG_MAPPING_SCHEMA``` schema will define a general tag mapping schema (you could define a local one for each machine in each group, and enable/disable setup for specific machine), and so on...
+The file involved by these keys are the one pointed by ```PREDIX_GLOBAL_CONFIG.OPCUA_DATANODES```.
+
+__NOTE__: each Site and each Group of machines in each Site have to be named: if you procede without giving a name to a Site Schema, a default name will be assigned to the schema. Further, each Group has to be "headed" with a name: if you procede without giving a name to a Group, a default head name will be assigned. This logic is intended to prevent losing of partial setup during step.
+
+```
+  "SITES": {
+    "site_1_name": {
+      "group_1_name": {
+        "GLOBAL_TAG_MAPPING_SCHEMA": "tag_mapping_schema_1",
+        "GLOBAL_ENABLE_SETUP": true,
+        "GLOBAL_PREFIX": "predix.group.prefix.1_",
+        "MACHINES": {
+          "machine_plate_1": {
+            "PCU": "pcu_name_1",
+            "IP": "machine_ip",
+            "NAT": "machine_natted_ip",
+            "INFO": "machine_description",
+            "PROTOCOL": "machine_protocol",
+            "LOCAL_TAG_MAPPING_SCHEMA": "tag_mapping_schema_1",
+            "LOCAL_ENABLE_SETUP": true
+          },
+          "machine_plate_2": {
+
+        "tag_mapping_schema_2": { ... },
+        ... // other schema go here
+
+	}
+```
+
+##### MACHINES
+
+The __```MACHINES```__ key in the body of a Group specify machines: it is a dict, with key defining properties. They are not all necessary: the most important are the machine plate and the PCU name for IGS. The other one are only descriptive information.
+The file involved by these keys are the one pointed by ```PREDIX_GLOBAL_CONFIG.OPCUA_DATANODES```.
+
+__NOTE__: each machine plate must be different from the others in the same Group.
+
+```
+  "SITES": {
+    "site_1_name": {
+      "group_1_name": {
+        "GLOBAL_TAG_MAPPING_SCHEMA": "tag_mapping_schema_1",
+        "GLOBAL_ENABLE_SETUP": true,
+        "GLOBAL_PREFIX": "predix.group.prefix.1_",
+        "MACHINES": {
+          "machine_plate_1": {
+            "PCU": "pcu_name_1",
+            "IP": "machine_ip",
+            "NAT": "machine_natted_ip",
+            "INFO": "machine_description",
+            "PROTOCOL": "machine_protocol",
+            "LOCAL_TAG_MAPPING_SCHEMA": "tag_mapping_schema_1",
+            "LOCAL_ENABLE_SETUP": true
+          },
+          "machine_plate_2": {
+
+        "tag_mapping_schema_2": { ... },
+        ... // other schema go here
+
+	}
+```
+
 ### <a name="thirdmillenniumway"></a> How it works: Third Millennium way
 
 I create an angular4-based webapp to help you create your ```your-factory.json``` configuration file. The app will guide you through various step, but you can always see in real time the preview of your json configuration changing over time. You can setup your app to run locally or use the one host on [TODO](https://predix-configurator.github.io)
@@ -186,10 +251,10 @@ And point your browser to [http://localhost:4200/](http://localhost:4200/)
 ![Picture](images/screen-sites-groups.png)
 
 ##### STEP 6: Machines Configuration
-TODO YET
+![Picture](images/screen-machines.png)
 
 ##### STEP 7: Result
-TODO YET
+![Picture](images/screen-result.png)
 
 ### Thank you
 

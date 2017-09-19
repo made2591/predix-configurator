@@ -28,5 +28,11 @@ export class PredixGlobalConfigComponent implements OnInit {
             return;
         this.predixConfigurationDataService.setPredixGlobalConfig(this.predixGlobalConfig);
     }
-
+    
+    reset() {
+        
+        this.predixConfigurationDataService.setPredixConfigurationData(this.predixConfigurationDataService.resetPredixConfigurationData());
+        
+    }
+    
 }

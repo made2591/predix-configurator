@@ -223,4 +223,10 @@ export class TagMappingSchemaComponent implements OnInit {
 
     }
 
+    reset() {
+        
+        this.predixConfigurationDataService.setPredixConfigurationData(this.predixConfigurationDataService.resetPredixConfigurationData());
+        
+    }
+    
 }

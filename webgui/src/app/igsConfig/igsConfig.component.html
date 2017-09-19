@@ -28,7 +28,7 @@
                     <button uiSref="homePage" class="btn waves-effect waves-light predix darken-2" (click)="save(igsConfigForm)">Welcome Page
                         <i class="material-icons right">home</i>
                     </button>
-                    <button class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset" id="reset">Reset Conf
+                    <button uiSref="homePage" class="btn waves-effect waves-light predix lighten-5" style="margin: 5px auto;" name="reset" id="reset" (click)="reset()">Reset Conf
                         <i class="material-icons right">delete</i>
                     </button>
                     <button class="btn waves-effect waves-light predix lighten-3" style="margin: 5px auto;" name="load" id="load" (click)="igsConfig.setDefault();">Load Conf

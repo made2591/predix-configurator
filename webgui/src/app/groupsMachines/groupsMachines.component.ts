@@ -269,4 +269,10 @@ export class GroupsMachinesComponent implements OnInit {
         
     }
     
+    reset() {
+        
+        this.predixConfigurationDataService.setPredixConfigurationData(this.predixConfigurationDataService.resetPredixConfigurationData());
+        
+    }
+    
 }

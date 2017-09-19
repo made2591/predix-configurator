@@ -58,5 +58,11 @@ export class PredixCloudConfigComponent implements OnInit {
             return;
         this.predixConfigurationDataService.setPredixCloudConfig(this.predixCloudConfig);
     }
-
+    
+    reset() {
+        
+        this.predixConfigurationDataService.setPredixConfigurationData(this.predixConfigurationDataService.resetPredixConfigurationData());
+        
+    }
+    
 }
