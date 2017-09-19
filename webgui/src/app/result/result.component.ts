@@ -8,6 +8,7 @@ import { PredixConfigurationDataService }   from '../data/predixConfigurationDat
 
 export class ResultComponent implements OnInit {
     title = 'Thanks for Predix Configurator Tool';
+    description = 'Thanks for Predix Configurator Tool';
     @Input() predixConfigurationData;
     isPredixConfigurationDataValid: boolean = false;
     

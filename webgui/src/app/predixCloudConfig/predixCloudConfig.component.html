@@ -39,7 +39,7 @@
                     <a class="btn-floating btn-small waves-effect waves-light light-blue" id="addproxyexception" name="addproxyexception" (click)="addException();" style="margin-top: 50px;"><i class="material-icons">add</i></a>
                 </div>
                 <div class="input-field col s12" formArrayName="exceptionList">
-                    <div *ngFor="let exception of exceptionsForm.get('exceptionList').controls; let i = index" class="chip">{{exception.value}}<i class="close material-icons" (click)="removeException(i);">close</i></div>
+                    <div *ngFor="let exception of exceptionsForm['controls'].exceptionList['controls']; let i = index" class="chip">{{exception.value}}<i class="close material-icons" (click)="removeException(i);">close</i></div>
                 </div>
                 <!--<div class="input-field col s12" formArrayName="exceptionList">-->
                     <!--<div class="chips chips-autocomplete" onclick="return createChips();"></div>-->

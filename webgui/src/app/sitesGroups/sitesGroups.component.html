@@ -8,9 +8,9 @@
     <div class="tab-pane fade in active">
         <form [formGroup]="sitesGroupsWrapper" novalidate (ngSubmit)="save(sitesGroupsWrapper)">
             <div formArrayName="sitesGroupsForms">
-                <div *ngFor="let sitesGroupsForm of sitesGroupsWrapper.controls.sitesGroupsForms.controls; let formIndex=index">
+                <div *ngFor="let sitesGroupsForm of sitesGroupsWrapper['controls'].sitesGroupsForms['controls']; let formIndex=index">
                     <div [formGroupName]="formIndex" class="row z-depth-3 predix darken-4" style="padding: 25px 50px;">
-                        <div *ngIf="sitesGroupsWrapper.controls.sitesGroupsForms.controls.length > 1">
+                        <div *ngIf="sitesGroupsWrapper['controls'].sitesGroupsForms['controls'].length > 1">
                             <div class="input-field col s10">
                                 <input class="form-control input-md" name="siteName" type="text"
                                        placeholder="SITE NAME: Insert here the name of the Site of your Factory"
@@ -27,7 +27,7 @@
                                         class="material-icons">add</i></a>
                             </div>
                         </div>
-                        <div *ngIf="sitesGroupsWrapper.controls.sitesGroupsForms.controls.length <= 1">
+                        <div *ngIf="sitesGroupsWrapper['controls'].sitesGroupsForms['controls'].length <= 1">
                             <div class="input-field col s11">
                                 <input class="form-control input-md" name="siteName" type="text"
                                        placeholder="SITE NAME: Insert here the name of the Site of your Factory"
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div formArrayName="groups">
-                            <div *ngFor="let siteGroup of sitesGroupsForm.controls.groups.controls; let siteGroupIndex=index">
+                            <div *ngFor="let siteGroup of sitesGroupsForm['controls'].groups['controls']; let siteGroupIndex=index">
                                 <div [formGroupName]="siteGroupIndex" style="padding-right: 11px;">
                                     <div class="row">
                                         <div class="input-field col s5 offset-s1">
@@ -80,7 +80,7 @@
                                                 Setup</label>
                                             </p>
                                         </div>
-                                        <div *ngIf="sitesGroupsForm.controls.groups.controls.length > 1"
+                                        <div *ngIf="sitesGroupsForm['controls'].groups['controls'].length > 1"
                                              class="input-field col s1 center-align">
                                             <a class="btn-floating btn-small waves-effect waves-light red"
                                                name="removeGroup"

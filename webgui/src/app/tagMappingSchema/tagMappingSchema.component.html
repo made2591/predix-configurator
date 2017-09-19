@@ -8,9 +8,9 @@
     <div class="tab-pane fade in active">
         <form [formGroup]="tagMappingSchemaWrapper" novalidate (ngSubmit)="save(tagMappingSchemaWrapper)">
             <div formArrayName="tagMappingSchemaForms">
-                <div *ngFor="let tagMappingSchemaForm of tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls; let formIndex=index">
+                <div *ngFor="let tagMappingSchemaForm of tagMappingSchemaWrapper['controls'].tagMappingSchemaForms['controls']; let formIndex=index">
                     <div [formGroupName]="formIndex" class="row z-depth-3 predix darken-4" style="padding: 25px 50px;">
-                        <div *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length > 1">
+                        <div *ngIf="tagMappingSchemaWrapper['controls'].tagMappingSchemaForms['controls'].length > 1">
                             <div class="input-field col s5">
                                 <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="MAPPING_SCHEMA_NAME: Tag Mapping Group Name" formControlName="mappingSchemaName">
                             </div>
@@ -24,7 +24,7 @@
                                 <a class="btn-floating btn-small waves-effect waves-light light-blue" name="addTagCouple" (click)="addNewTagMappingSchema();"><i class="material-icons">add</i></a>
                             </div>
                         </div>
-                        <div *ngIf="tagMappingSchemaWrapper.controls.tagMappingSchemaForms.controls.length <= 1">
+                        <div *ngIf="tagMappingSchemaWrapper['controls'].tagMappingSchemaForms['controls'].length <= 1">
                             <div class="input-field col s6">
                                 <input class="form-control input-md" name="mappingSchemaName" type="text" placeholder="MAPPING_SCHEMA_NAME: Tag Mapping Group Name" formControlName="mappingSchemaName">
                             </div>
@@ -36,9 +36,9 @@
                             </div>
                         </div>
                         <div formArrayName="mappingSchemaDict">
-                            <div *ngFor="let mappingCouple of tagMappingSchemaForm.controls.mappingSchemaDict.controls; let coupleTagIndex=index">
+                            <div *ngFor="let mappingCouple of tagMappingSchemaForm['controls'].mappingSchemaDict['controls']; let coupleTagIndex=index">
                                 <div [formGroupName]="coupleTagIndex">
-                                    <div *ngIf="tagMappingSchemaForm.controls.mappingSchemaDict.controls.length > 1">
+                                    <div *ngIf="tagMappingSchemaForm['controls'].mappingSchemaDict['controls'].length > 1">
                                         <div class="input-field col s4 offset-s1">
                                             <input class="form-control input-md" name="tagFrom" type="text" placeholder="TAG_FROM: Predix Cloud Tag" formControlName="tagFrom">
                                         </div>
@@ -52,7 +52,7 @@
                                             <a class="btn-floating btn-small waves-effect waves-light red" name="removeTagCouple" (click)="removeNewTagCouple(formIndex, coupleTagIndex);"><i class="material-icons">delete</i></a>
                                         </div>
                                     </div>
-                                    <div *ngIf="tagMappingSchemaForm.controls.mappingSchemaDict.controls.length <= 1">
+                                    <div *ngIf="tagMappingSchemaForm['controls'].mappingSchemaDict['controls'].length <= 1">
                                         <div class="input-field col s5 offset-s1">
                                             <input class="form-control input-md" name="tagFrom" type="text" placeholder="TAG_FROM: Predix Cloud Tag" formControlName="tagFrom">
                                         </div>
