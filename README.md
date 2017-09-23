@@ -1,10 +1,6 @@
 # Predix Configurator
 
-A [Predix](http://predix.io)&copy; configurator tool (cli) written in Python + an angular2 webapp to help you manage your Edge Connectivity stack, from machines in your factory to Predix microservices in your cloud space.
-
-### Demo
-
-You can see an active demo of webapp to create json file on [Heroku](https://predix-configurator.herokuapp.com).
+A [Predix](http://predix.io)&copy; configurator tool (cli) written in Python + an AngularJS 4 webapp to help you manage your Edge Connectivity stack, from machines in your factory to Predix microservices in your cloud space.
 
 ### Factory stack
 
